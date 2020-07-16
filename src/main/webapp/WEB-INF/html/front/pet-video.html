@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/resources/css/style.css">
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+    <script type="text/javascript" src="/resources/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/resources/js/header.js"></script>
+    <script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        #content{height: 800px;}
+        #content #left{}
+        #content div table{}
+        #content div table tr{}
+        #content div table th{color:#ff5f0b;font-size: 30px;}
+        #content div table tr td{}
+        #content div table tr td img{}
+        #content div table tr td p{}
+        #content div table tr td p a{color: #2c1d00;text-decoration: none;}
+        #content div table tr td p a:hover{color: #ca7d10;}
+    </style>
+    <title>萌宠视频</title>
+    <script language="JavaScript" type="text/javascript">
+        function check(videotype) {
+            var fileTypes = new Array("flv","avi","mp4");  //定义可支持的文件类型数组
+            var fileTypeFlag = "0";
+            var newFileName = videotype.split('.');
+            newFileName = newFileName[newFileName.length-1];
+            for(var i=0;i<fileTypes.length;i++){
+                if(fileTypes[i] == newFileName){
+                    fileTypeFlag = "1";
+                }
+            }
+            if(fileTypeFlag == "0"){
+                alert("必须是视频文件！");
+                var obj=document.getElementById('file_input');
+                obj.outerHTML=obj.outerHTML;
+            }
+        }
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-static-top" id="header">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#menue">
+                <span class="sr-only">切换导航</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/front/index"><h3>萌首页</h3></a>
+        </div>
+        <div class="collapse navbar-collapse" id="menue">
+            <ul class="nav navbar-nav">
+                <li><a href="/front/pet-baike">宠物百科</a></li>
+                <li><a href="/front/pet-news">宠物资讯</a></li>
+                <li><a href="/front/pet-post">宠物贴吧</a></li>
+                <li><a href="/front/pet-images">萌宠秀秀</a></li>
+                <li><a href="/front/pet-video">宠物视频</a></li>
+                <li><a href="/front/pet-adopt">流浪之家</a></li>
+                <li class="dropdown">
+                    <a href="/front/pet-shopping" >
+                        宠淘淘 <b class="caret"></b>
+                    </a>
+                </li>
+                <img id="logo" src="/upload/img/image/logo.jpg" class="hidden-xs" >
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid" id="content">
+    <div class="col-md-9" id="left">
+        <table>
+            <th>奇趣王国</th><div style="float: right">更多</div><hr>
+            <tr>
+                <td><a href="/front/player?videoID=1"><img src="/upload/img/image/kingdom-vedio-1.jpg"></a><p><a href="">黄阿玛剪指甲，又有刁民<br>要害朕!</a></p></td>
+                <td><a href="/front/player?videoID=2"><img src="/upload/img/image/kingdom-vedio-2.jpg"></a><p><a href="">柴犬二货老爹，这次跟儿<br>子吵起来了</a></p></td>
+                <td><a href="/front/player?videoID=3"><img src="/upload/img/image/kingdom-vedio-3.jpg"></a><p><a href="">猫要是智障起来，铲屎官根<br>本拦不住</a></p></td>
+            </tr>
+            <th>家有萌宠</th>
+            <tr>
+                <td><a href="/front/player?videoID=4"><img src="/upload/img/image/home-vedio-1.jpg"></a><p><a href="">真相了！喵星与汪星的不同</a></p></td>
+                <td><a href="/front/player?videoID=5"><img src="/upload/img/image/home-vedio-2.jpg"></a><p><a href="">狗狗的花样一家</a></p></td>
+                <td><a href="/front/player?videoID=6"><img src="/upload/img/image/home-vedio-3.jpg"></a><p><a href="">你家狗狗还在外面暴冲么？</a></p></td>
+            </tr>
+            <th>赛事前线</th>
+            <tr>
+                <td><a href="/front/player?videoID=7"><img src="/upload/img/image/match-vedio-1.jpg"></a><p><a href="">CFA国际名猫展超萌来袭</a></p></td>
+                <td><a href="/front/player?videoID=8"><img src="/upload/img/image/match-vedio-2.jpg"></a><p><a href="">金毛Hummer悍马南宁冠军展<br>夺冠记</a></p></td>
+                <td><a href="/front/player?videoID=9"><img src="/upload/img/image/match-vedio-3.jpg"></a><p><a href="">中国名将NGKC广州冠军展<br>巅峰BIS总冠军时刻</a></p></td>
+            </tr>
+            <th>公益之星</th>
+            <tr>
+                <td><a href="/front/player?videoID=10"><img src="/upload/img/image/match-vedio-1.jpg"></a><p><a href="">周杰伦出镜倡导野生救援</a></p></td>
+                <td><a href="/front/player?videoID=11"><img src="/upload/img/image/match-vedio-2.jpg"></a><p><a href="">美国男子捡到一只会笑的流<br>浪狗</a></p></td>
+                <td><a href="/front/player?videoID=12"><img src="/upload/img/image/match-vedio-3.jpg"></a><p><a href="">救助流浪狗Emma</a></p></td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-3" id="right">
+        <h2>精彩推荐</h2>
+
+        <div><video id="video3" src="${petvideolist[0].link}" width="270" height="160" controls></video></div>
+        <div><video id="video2" src="${petvideolist[1].link}" width="270" height="160" controls></video></div>
+        <div><video id="video1" src="${petvideolist[11].link}" width="270" height="160" controls></video></div>
+        <br/><br/><br/>
+        <form action="uploadvideo" method="post" enctype="multipart/form-data">
+            上传视频<input id="file_input" type="file" value="选择文件" name="video"  onchange="check(this.value)"><br>
+            视频名称：<input type="text" name="videoname"><br>
+            <input name="submit" type="submit"  value="上传" />
+            <input name="reset" type="reset"  value="重置"/>
+
+        </form>
+    </div>
+</div>
+
+
+<div id="ad" class="col-xs-12">
+    <img src="/upload/img/image/ad1.jpg">
+    <img src="/upload/img/image/ad2.jpg">
+    <img src="/upload/img/image/ad3.jpg">
+</div>
+<div id="bottom" class="col-xs-12">
+    <img src="/upload/img/image/bottom-img1.jpg" >
+    <img src="/upload/img/image/bottom-img2.jpg" >
+    <img src="/upload/img/image/bottom-img3.jpg" >
+    <img src="/upload/img/image/bottom-img4.jpg" >
+</div>
+<div id="footer" class="col-xs-12">版权所有@江西师范大学x3513工作室<br>电话：888-8888</div>
+
+</body>
+</html>

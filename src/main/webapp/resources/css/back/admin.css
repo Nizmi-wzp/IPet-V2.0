@@ -1,0 +1,39 @@
+div.layadmin-header{
+    padding: 2em;
+}
+/*缩略图*/
+.layui-table img{
+    max-width: 100px;
+}
+/*QQ，微信，微博图标*/
+.layui-icon-login-qq{
+    color: #3492ed;
+}
+.layui-icon-login-wechat{
+    color: #4daf29;
+}
+.layui-icon-login-weibo{
+    color: #cf1900;
+}
+.layui-icon-cellphone{
+    color: #16a2ff;
+}
+
+/*搜索图标*/
+#usersearch{
+    position: absolute;
+    top:0.6em;
+    left: 0.8em;
+
+}
+/*取消图标*/
+.layadmin-caller .caller-seach .caller-icon {
+    font-size: 18px;
+    position: absolute;
+    top: 0.6em;
+}
+
+.layadmin-caller .caller-dump-icon {
+    right: 2em;
+    cursor: pointer;
+}

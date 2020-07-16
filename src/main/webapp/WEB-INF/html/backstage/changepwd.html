@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改密码</title>
+    <link rel="stylesheet" href="../resources/backstage/backcss/bootstrap.css">
+    <script type="text/javascript" src="../resources/backstage/backjs/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../resources/backstage/backjs/bootstrap.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="text-center text-primary">修改密码</div>
+    <hr/>
+    <div class="form-group has-success">
+        <label class="col-lg-1 control-label">用户名</label>
+        <div class="col-lg-11">
+            <input class="form-control" id="adminName" type="text" placeholder="用户名...">
+        </div>
+    </div>
+    <div class="form-group has-error">
+        <label class="col-lg-1 control-label">原密码</label>
+        <div class="col-lg-11">
+            <input class="form-control" id="password" type="text" placeholder="原密码...">
+        </div>
+    </div>
+    <div class="form-group has-warning">
+        <label class="col-lg-1 control-label">新密码</label>
+        <div class="col-lg-11">
+            <input class="form-control" id="newPassword" type="text" placeholder="新密码...">
+        </div>
+    </div>
+    <div class="form-group has-feedback">
+        <label class="col-lg-1 control-label">确认密码</label>
+        <div class="col-lg-11">
+            <input class="form-control" id="confirmPassword" type="text" placeholder="确认密码...">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="j_captcha" class="col-lg-1 control-label">验证码</label>
+        <div class="col-lg-8">
+            <input class="form-control" id="j_captcha" type="text" placeholder="验证码..">
+            <img id="captcha_img" alt="点击更换" title="点击更换"
+                 onclick="changeVerifyCode(this)" src="../Kaptcha" />
+        </div>
+    </div>
+
+</div>
+<div class="btn btn-block btn-primary" id="submit">提交</div>
+<div id="back" class="btn btn-info btn-block">返回</div>
+<script type="text/javascript" src="../resources/js/common/common.js"></script>
+<script type="text/javascript" src="../resources/backstage/backjs/changepwd.js"></script>
+</body>
+</html>

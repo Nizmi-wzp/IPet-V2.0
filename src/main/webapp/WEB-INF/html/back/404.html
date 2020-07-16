@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>404</title>
+    <link rel="stylesheet" href="/resources/backstage/backjs/layui-v2.4.5/layui/css/layui.css">
+</head>
+<body class="layui-layout-body layui-bg-gray">
+<!-- 顶部导航-->
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">萌宠后台管理</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item layadmin-flexible" lay-unselect="">
+                <a title="侧边伸缩" href="javascript:;" layadmin-event="flexible">
+                    <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
+                </a>
+            </li>
+            <li class="layui-nav-item"><a href="">控制台</a></li>
+            <li class="layui-nav-item"><a href="">商品管理</a></li>
+            <li class="layui-nav-item"><a href="">用户</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">其它系统</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">邮件管理</a></dd>
+                    <dd><a href="">消息管理</a></dd>
+                    <dd><a href="">授权管理</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item" lay-unselect="">
+                <a href="/back/message" layadmin-event="message">
+                    <i class="layui-icon layui-icon-notice"></i>
+
+                    <!-- 如果有新消息，则显示小圆点 -->
+                    <script type="text/html" template="" lay-url="./json/message/new.js">
+                        {{# if(d.data.newmsg){ }}
+                        <span class="layui-badge-dot"></span>
+                        {{# } }}
+                    </script>  <span class="layui-badge-dot"></span>
+
+                </a>
+            </li>
+
+            <li class="layui-nav-item" id="myself">
+                <a href="javascript:;">个人中心<span id="dot" class="layui-badge-dot"></span></a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img" id="loginimg">
+                    <span id="loginname"></span>
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="/back/myinfo">基本资料</a></dd>
+                    <dd><a href="/back/changepwd">修改密码</a></dd>
+                </dl>
+            </li>
+            <li id="logout" class="layui-nav-item"><a href="javascript:;">退出</a></li>
+        </ul>
+    </div>
+    <!--左侧导航-->
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed" id="superadmin">
+                    <a class="" href="javascript:;"><i class="layui-icon layui-icon-component"></i>管理员管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/back/adminmanager">管理员信息</a></dd>
+                        <dd><a href="javascript:;">权限管理</a></dd>
+                        <dd id="inform"><a href="javascript:;">发布公告</a></dd>
+                        <dd><a href="/back/adminmanager">其他管理</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">主页</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/back/index">主页一</a></dd>
+                        <dd><a href="/back/baidu">内嵌页面</a></dd>
+                        <dd><a href="/back/404">404页面</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="/back/newsmanager">资讯管理</a></li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">贴吧管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/back/postmanager">帖子列表</a></dd>
+                        <dd><a href="/back/replymanager">回帖列表</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="/back/usermanager">用户管理</a></li>
+                <li class="layui-nav-item"><a href="/back/imagesmanager">图片管理</a></li>
+                <li class="layui-nav-item"><a href="/back/videomanager">视频管理</a></li>
+                <li class="layui-nav-item"><a href="/back/location">地图定位</a></li>
+            </ul>
+        </div>
+    </div>
+    <!--主体内容区-->
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">
+
+            <div class="layadmin-tabsbody-item layui-show">
+                <div class="layui-fluid" style="text-align: center">
+                <div class="layadmin-tips" style="">
+                    <i class="layui-icon" face="" style="font-size: 30em; color: rgba(0,0,0,0.53);"></i>
+                    <div class="layui-text">
+                        <h1>
+                            <span class="layui-anim layui-anim-loop layui-anim-scaleSpring" style="font-size: 2.5em">4</span>
+                            <span class="layui-anim layui-anim-loop layui-anim-fadeout" style="font-size: 2.5em">0</span>
+                            <span class="layui-anim layui-anim-loop layui-anim-scale" style="font-size: 2.5em">4</span>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © www.Ipet.com - 萌宠信息平台
+        时间：<span id="time" ></span>
+    </div>
+</div>
+<script src="/resources/backstage/backjs/layui-v2.4.5/layui/layui.js"></script>
+<script>
+    //JavaScript代码区域
+    layui.use(['element','layer', 'laypage', 'laydate','layim'], function(){
+        var element = layui.element;//模块预加载
+        var layer = layui.layer;
+        var laypage=layui.laypage;
+        var laydate=layui.laydate;
+        var layim=layui.layim;
+
+
+
+        //传入Date对象给初始值
+        laydate.render({
+            elem: '#time'
+            ,type: 'datetime'
+            ,value: new Date()
+        });
+
+    });
+
+
+</script>
+<script type="text/javascript" src="../resources/backstage/backjs/jquery-3.3.1.min.js"></script>
+<script src="/resources/js/back/index.js"></script>
+</body>
+</html>

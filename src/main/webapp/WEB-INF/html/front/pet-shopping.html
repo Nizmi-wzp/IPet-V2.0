@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>宠淘淘</title>
+<!--    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="/resources/css/style.css">
+    <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+    <script type="text/javascript" src="../resources/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../resources/js/header.js"></script>
+    <script type="text/javascript" src="../resources/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<!--页头-->
+<nav class="navbar navbar-default navbar-static-top" id="header">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#menue">
+                <span class="sr-only">切换导航</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/front/index"><h3>萌首页</h3></a>
+        </div>
+        <div class="collapse navbar-collapse" id="menue">
+            <ul class="nav navbar-nav">
+                <li><a href="/front/pet-baike">宠物百科</a></li>
+                <li><a href="/front/pet-news">宠物资讯</a></li>
+                <li><a href="/front/pet-post">宠物贴吧</a></li>
+                <li><a href="/front/pet-images">萌宠秀秀</a></li>
+                <li><a href="/front/pet-video">宠物视频</a></li>
+                <li><a href="/front/pet-adopt">流浪之家</a></li>
+                <li class="dropdown">
+                    <a href="/front/pet-shopping" >
+                        宠淘淘 <b class="caret"></b>
+                    </a>
+                </li>
+                <img id="logo" src="/upload/img/image/logo.jpg" class="hidden-xs" >
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+
+
+
+
+<header class="bar bar-nav">
+
+</header>
+<div class="bar bar-header-secondary">
+    <div class="searchbar form-inline">
+
+        <input type="text" class="form-control " id='queryKey' placeholder='请输入关键字'/>
+        <button id="search" class="btn btn-primary">搜索</button>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="content">
+    <img width="1500px" height="200px" class="thumb" src="/upload/img/image/pc1.jpg">
+    <div class="content-block"><font color="black" size="+1" >百度百科</font>
+        <div id="user">
+            hello
+        </div>
+
+
+
+
+    </div>
+
+    <div id="pags" style="margin-left: 40%">
+        <!-- 分页  -->
+        <div id="pagination" style="float:left;"></div>
+        <div id="showpagecount" style="display: inline-block;margin-left: 20px;height: 35px;line-height: 35px;"></div>
+    </div>
+</div>
+
+
+
+<div id="ad" class="col-xs-12">
+    <img src="/upload/img/image/ad1.jpg">
+    <img src="/upload/img/image/ad2.jpg">
+    <img src="/upload/img/image/ad3.jpg">
+</div>
+<div id="bottom" class="col-xs-12">
+    <img src="/upload/img/image/bottom-img1.jpg" >
+    <img src="/upload/img/image/bottom-img2.jpg" >
+    <img src="/upload/img/image/bottom-img3.jpg" >
+    <img src="/upload/img/image/bottom-img4.jpg" >
+</div>
+<div id="footer" class="col-xs-12">版权所有@江西师范大学x3513工作室<br>电话：888-8888</div>
+
+</body>
+
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type='text/javascript' src="/resources/js/jqPaginator.js"></script>
+<script type='text/javascript'
+        src='/resources/js/baike.js' charset='utf-8'></script>
+<script>
+    $(document).ready(function(){
+        $("#user").innerHTML("333333");
+    });
+</script>
+
+</html>

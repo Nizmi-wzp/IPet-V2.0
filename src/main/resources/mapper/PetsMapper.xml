@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wzp.pet.mapper.PetsMapper">
+    <select id="queryPetList" resultType="com.wzp.pet.po.Pets">
+            SELECT
+            pet_id,
+            pet_name,
+            pet_image,
+            pet_sex,
+            pet_age,
+            pet_species,
+            pet_content
+            FROM
+            pets
+            <where>
+                <if test="petsCondition.petId!=null">
+                    pet_id=#{petsCondition.petId}
+                </if>
+            </where>
+            order by
+            pet_id ASC
+            limit #{rowIndex},#{pageSize};
+    </select>
+
+</mapper>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/resources/css/style.css">
+        <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+        <script type="text/javascript" src="/resources/js/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
+        <title>宠物领养</title>
+        <style type="text/css">
+            #top-header{padding:40px 60px;background:#985f0d;margin-top:60px;}
+            .container-fluid #adopt-content ul li{width: 200px;height: 180px;float: left;border:1px solid #ccc;}
+            .container-fluid #adopt-content ul li img{width: 100px;height: 80px;border: 1px solid #ccc;}
+        </style>
+    </head>
+<body>
+<nav class="navbar navbar-default navbar-static-top" id="header">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#menue">
+                <span class="sr-only">切换导航</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/front/index"><h3>萌首页</h3></a>
+        </div>
+        <div class="collapse navbar-collapse" id="menue">
+            <ul class="nav navbar-nav">
+                <li><a href="/front/pet-baike">宠物百科</a></li>
+                <li><a href="/front/pet-news">宠物资讯</a></li>
+                <li><a href="/front/pet-post">宠物贴吧</a></li>
+                <li><a href="/front/pet-images">萌宠秀秀</a></li>
+                <li><a href="/front/pet-video">宠物视频</a></li>
+                <li><a href="/front/pet-adopt">流浪之家</a></li>
+                <li class="dropdown">
+                    <a href="/front/pet-shopping" >
+                        宠淘淘 <b class="caret"></b>
+                    </a>
+                </li>
+                <img id="logo" src="/upload/img/image/logo.jpg" class="hidden-xs" >
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="top-header"></div>
+<div class="container-fluid">
+    <div class="col-md-8" id="adopt-content">
+        <h3>宠物领养</h3>
+        <hr>
+        <ul>
+            <li><img src="/upload/img/image/dog1.jpg">名称：小黑<br/>年龄：3岁<br/>宠物介绍：<button class="btn btn-info">领养</button></li>
+            <li><img src="/upload/img/image/dog2.jpg">名称：小黑<br/>年龄：2岁<br/>宠物介绍：<button class="btn btn-info">领养</button></li>
+            <li><img src="/upload/img/image/dog3.jpg">名称：小黑<br/>年龄：2岁<br/>宠物介绍：<button class="btn btn-info">领养</button></li>
+            <li><img src="/upload/img/image/dog4.jpg">名称：小黑<br/>年龄：1岁<br/>宠物介绍：<button class="btn btn-info">领养</button></li>
+            <li><img src="/upload/img/image/cat1.jpg">名称：小黑<br/>年龄：3岁<br/>宠物介绍：<button class="btn btn-info">领养</button></li>
+            <li><img src="/upload/img/image/cat2.jpg">名称：小黑<br/>年龄：4岁<br/>宠物介绍：<button class="btn btn-info">领养</button></li>
+            <li><img src="/upload/img/image/cat3.jpg">名称：小黑<br/>年龄：1岁<br/>宠物介绍：<button class="btn btn-info">领养</button></li>
+            <li><img src="/upload/img/image/cat4.jpg">名称：小黑<br/>年龄：2岁<br/>宠物介绍：<button class="btn btn-info">领养</button></li>
+            <li><img src="/upload/img/image/bird1.jpg">名称：小黑<br/>年龄：1岁<br/>宠物介绍：<button class="btn btn-info">领养</button></li>
+            <li><img src="/upload/img/image/bird2.jpg">名称：小黑<br/>年龄：5岁<br/>宠物介绍：<button class="btn btn-info">领养</button></li>
+            <li><img src="/upload/img/image/bird3.jpg">名称：小黑<br/>年龄：4岁<br/>宠物介绍：<button class="btn btn-info">领养</button></li>
+            <li><img src="/upload/img/image/bird4.jpg">名称：小黑<br/>年龄：3岁<br/>宠物介绍：<button class="btn btn-info">领养</button></li>
+        </ul>小黑
+    </div>
+    <div class="col-md-4" style="border: #CCCCCC 1px solid; height: 100%">
+        推荐信息
+        最近记录
+        <div id="uploadimg">
+            <div>缩略图<input type="file" id="small-img"></div>
+            <div>详情图<input type="file" class="detail-img"></div>
+            <div class="btn btn-primary" id="submit">提交</div>
+        </div>
+    </div>
+</div>
+
+<div id="ad" class="col-xs-12">
+    <img src="/upload/img/image/ad1.jpg">
+    <img src="/upload/img/image/ad2.jpg">
+    <img src="/upload/img/image/ad3.jpg">
+</div>
+<div id="bottom" class="col-xs-12">
+    <img src="/upload/img/image/bottom-img1.jpg" >
+    <img src="/upload/img/image/bottom-img2.jpg" >
+    <img src="/upload/img/image/bottom-img3.jpg" >
+    <img src="/upload/img/image/bottom-img4.jpg" >
+</div>
+<div id="footer" class="col-xs-12">版权所有@江西师范大学x3513工作室<br>电话：888-8888</div>
+
+<script type="text/javascript" src="/resources/js/petadopt.js"></script>
+</body>
+</html>
+

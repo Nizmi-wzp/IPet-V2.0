@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wzp.pet.mapper.AdminMapper">
+    <resultMap id="adminResultMap" type="com.wzp.pet.po.Admin">
+        <id column="admin_id" property="adminId" />
+        <result column="admin_name" property="adminName" />
+        <result column="admin_password" property="adminPassword" />
+        <result column="role" property="role" />
+        <result column="sex" property="sex" />
+        <result column="nickname" property="nickname" />
+        <result column="photo" property="photo" />
+        <result column="phone" property="phone" />
+        <result column="email" property="email" />
+        <result column="contents" property="contents" />
+    </resultMap>
+    <select id="queryAdminByName" resultType="com.wzp.pet.po.Admin">
+        select
+            admin_id,
+            admin_name,
+            admin_password,
+            role,
+            sex,
+            nickname,
+            photo,
+            phone,
+            email,
+            contents
+        from
+        admin
+        where
+            admin_name = #{adminName}
+    </select>
+
+    <select id="queryLocalByAdminNameAndPwd" resultMap="adminResultMap"
+            parameterType="String">
+		SELECT
+            admin_id,
+            admin_name,
+            admin_password,
+            role,
+            sex,
+            nickname,
+            photo,
+		    phone,
+		    email,
+            contents
+         from
+         admin
+         where
+           admin_name = #{adminName}
+         and
+           admin_password = #{adminPassword}
+	</select>
+
+    <select id="queryAdmin" resultType="com.wzp.pet.po.Admin">
+     select
+         admin_id,
+         admin_name,
+         admin_password,
+         role,
+         sex,
+         nickname,
+         photo,
+         phone,
+         email,
+         contents
+     from admin
+     ORDER BY admin_id
+	 ASC
+    </select>
+
+    <select id="queryAdminById" resultType="com.wzp.pet.po.Admin" parameterType="Long">
+        select
+            admin_id,
+            admin_name,
+            admin_password,
+            role,
+            sex,
+            nickname,
+            photo,
+            phone,
+            email,
+            contents
+        from admin
+        where admin_id=#{adminId}
+    </select>
+
+    <select id="queryAdminList" resultType="com.wzp.pet.po.Admin">
+        select
+        admin_id,
+        admin_name,
+        admin_password,
+        role,
+        sex,
+        nickname,
+        photo,
+        phone,
+        email,
+        contents
+        from admin
+    <where>
+        <if test="adminCondition.adminId!=null">
+            and admin_id =#{adminCondition.adminId}
+        </if>
+        <if test="adminCondition.nickname!=null">
+            and nickname like '%${adminCondition.nickname}%'
+        </if>
+        <if test="adminCondition.adminName!=null">
+            and admin_name =#{adminCondition.adminName}
+        </if>
+        <if test="adminCondition.adminPassword!=null">
+            and admin_password =#{adminCondition.adminPassword}
+        </if>
+        <if test="adminCondition.role!=null">
+            and role =#{adminCondition.role}
+        </if>
+        <if test="adminCondition.phone!=null">
+            and phone  =#{adminCondition.phone}
+        </if>
+    </where>
+        limit #{rowIndex},#{pageSize};
+    </select>
+
+    <select id="queryAdmincount" resultType="int">
+        select count(*)
+        from admin
+        <where>
+            <if test="adminCondition.adminName!=null">
+                and  admin_name like '%${adminCondition.adminName}%'
+            </if>
+            <if test="adminCondition.nickname!=null">
+                and  nickname like '%${adminCondition.nickname}%'
+            </if>
+        </where>
+
+    </select>
+
+    <insert id="insertAdmin" useGeneratedKeys="true" keyProperty="adminId"
+            keyColumn="admin_id">
+		INSERT
+		INTO
+		admin(
+            admin_name,
+            admin_password,
+            role,
+            sex,
+            nickname,
+            photo,
+            phone,
+            email,
+            contents)
+        VALUES
+            (#{adminName,},#{adminPassword},#{role},#{sex},#{nickname},#{photo},#{phone},#{email},#{contents})
+	</insert>
+<!--批量插入管理员信息-->
+    <insert id="batchInsertAdmin" parameterType="java.util.List">
+        insert into
+          admin(
+                admin_name,
+                admin_password,
+                role,
+                sex,
+                nickname,
+                photo,
+                phone,
+                email,
+                contents)
+        VALUES
+        <foreach collection="list" item="admin" index="index"
+        separator=",">
+            (#{admin.adminName,},
+             #{admin.adminPassword},
+             #{admin.role},
+             #{admin.sex},
+             #{admin.nickname},
+             #{admin.photo},
+             #{admin.phone},
+             #{admin.email},
+             #{admin.contents})
+
+        </foreach>
+    </insert>
+    <delete id="deleteAdmin">
+		DELETE FROM
+		admin
+		WHERE
+		admin_id =
+		#{adminId}
+	</delete>
+    <delete id="batchDeleteAdmin" parameterType="Long">
+		DELETE FROM
+		admin
+		WHERE
+		admin_id in
+		<foreach collection="list" item="adminId" open="(" separator="," close=")">
+            (#{adminId})
+        </foreach>
+	</delete>
+
+    <update id="updateAdmin" parameterType="com.wzp.pet.po.Admin">
+        update admin
+        <set>
+            <if test="adminName != null">admin_name=#{adminName},</if>
+            <if test="adminPassword != null">admin_Password=#{adminPassword}</if>
+        </set>
+        where admin_id=#{adminId}
+    </update>
+
+    <update id="updateAdminCondition">
+        update admin
+        <set>
+            <if test="newPassword != null">admin_password=#{newPassword}</if>
+        </set>
+        where
+        admin_name=#{adminName}
+        AND
+       admin_password=#{adminPassword}
+    </update>
+
+    <update id="updateAdminPwd">
+        update admin
+        <set>
+            <if test="newPassword != null">admin_password=#{newPassword}</if>
+        </set>
+        where
+        admin_id=#{adminId}
+    </update>
+
+
+</mapper>

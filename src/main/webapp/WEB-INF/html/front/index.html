@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="宠物，猫猫，狗狗，宠物视频，宠物用品，宠物图片">
+    <meta name="description" content="我想有个家，和宠物来个近距离交流">
+    <meta name="author" content="WZP">
+    <meta http-equiv="refresh" content="30">
+    <title>首页</title>
+
+<!--    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+    <script type="text/javascript" src="../resources/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../resources/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/resources/css/style.css">
+    <script type="text/javascript" src="/resources/js/header.js"></script>
+
+</head>
+<!--<%&#45;&#45;导航栏&#45;&#45;%>-->
+<body>
+<embed src="../music/bgmusic-qscwbsz.mp3" autostart="true" loop="10" starttime="00:10" height="0px"/>
+<!--<%&#45;&#45;<audio controls="controls">
+    <source src="../music/bgmusic-qscwbsz.mp3" type="audio/mp3" />
+</audio>&#45;&#45;%>-->
+<nav class="navbar navbar-default navbar-static-top" id="header">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#menue">
+                <span class="sr-only">切换导航</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/front/index"><h3>萌首页</h3></a>
+        </div>
+        <div class="collapse navbar-collapse" id="menue">
+            <ul class="nav navbar-nav">
+                <li><a href="/front/pet-baike">宠物百科</a></li>
+                <li><a href="/front/pet-news">宠物资讯</a></li>
+                <li><a href="/front/pet-post">宠物贴吧</a></li>
+                <li><a href="/front/pet-images">萌宠秀秀</a></li>
+                <li><a href="/front/pet-video">宠物视频</a></li>
+                <li><a href="/front/pet-adopt">流浪之家</a></li>
+                <li class="dropdown">
+                    <a href="/front/pet-shopping" >
+                        宠淘淘 <b class="caret"></b>
+                    </a>
+                </li>
+                <img id="logo" src="/upload/img/image/logo.jpg" class="hidden-xs" >
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!--<%&#45;&#45;贴图区&#45;&#45;%>-->
+<div id="photo" class="col-xs-12 img-responsive"><img src="/upload/img/image/dog.png" class="col-xs-12"></div>
+<!--<%&#45;&#45;主体内容区&#45;&#45;%>-->
+<div id="contents" class="container-fluid">
+    <div class="col-md-8 col-xs-12" id="left">
+        <div id="contents-left-1">
+            <img src="/upload/img/image/left-dog.jpg">
+            <span id="left-content-1">
+                <h2>柴犬</h2>
+                <p>柴犬是体型中等又最古老的日本犬。柴犬能够应付陡峭的丘陵和山脉的斜坡，拥有灵敏的感官，使得柴犬屡次成为上乘的猎狩犬。<a href="#">更多</a></p>
+            </span>
+        </div>
+        <div id="contents-left-2">
+            <img src="/upload/img/image/left-cat.jpg">
+            <span id="left-content-2">
+                 <h2>金吉拉猫</h2>
+                <p>新品种的猫，人工育种，祖先是安哥拉猫和波斯猫。金吉拉猫的毛尖颜色不如银色渐层猫的清楚，属于颜色较浅的猫。<a href="#">更多</a></p>
+            </span>
+        </div>
+        <div id="contents-left-3">
+            <img src="/upload/img/image/left-fish.jpg">
+            <span id="left-content-3">
+                <h2>富贵鱼</h2>
+                <p>安康鱼俗称富贵鱼为深海鱼类，生活在澳州悉尼海港·一般体色为深灰色或深褐色，黄色的安康鱼体色鲜艳，美丽吸引人，极为罕见。<a href="#">更多</a></p>
+            </span>
+        </div>
+        <div id="contents-left-4">
+            <img src="/upload/img/image/left-bird.jpg">
+            <span id="left-content-4">
+                <h2>翠鸟</h2>
+                <p>翠鸟属（学名：Alcedo）的鸟类属中型水鸟，自额至枕蓝黑色，密杂以翠蓝横斑，背部辉翠蓝色，腹部栗棕色；头顶有浅色横斑。<a href="#">更多</a></p>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-4 col-xs-12" id="right">
+        <div id="right-top">
+            <form class="form-group">
+                <div class="form-inline">
+                    <span class="glyphicon glyphicon-search"></span>
+                    <input class="form-control" placeholder="搜索">
+                    <button class="btn btn-default">搜索</button>
+                </div>
+                <input type="radio">关键字搜索
+                <input type="radio">分类搜索
+            </form>
+        </div>
+        <div id="right-bottom">
+            <ul id="myTab" class="nav nav-tabs">
+                <div>
+                    <span style="font-size: 50px;color: red">top</span>
+                    <span id="top">排行榜</span>
+                </div>
+                <li class="active">
+                    <a href="#month" data-toggle="tab">
+                        月
+                    </a>
+                </li>
+                <li><a href="#week" data-toggle="tab">周</a></li>
+                <li><a href="#day" data-toggle="tab">日</a></li>
+
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade in active" id="month">
+                    <ul>
+                        <li><a href="#" >狗狗总是爱扑人，今次一招就能制服它！</a></li>
+                        <li><a href="#">宠物兽医师水上争霸头脑风暴开启</a></li>
+                        <li><a href="">狗鼻子竟能闻出“癌细胞”？准确率超90%</a></li>
+                        <li><a href="">真人挑战吃奇葩狗粮，你能坚持到第几个？</a></li>
+                        <li><a href="">想要好身体，首先要有好肠胃！</a></li>
+                        <li><a href="">狗狗美容知多少</a></li>
+                        <li><a href="">真相只有一个！还原猫咪真实的内心世界。</a></li>
+                        <li><a href="">绣眼鸟叫（红肋花口各种小调调）</a></li>
+                    </ul>
+                </div>
+                <div class="tab-pane fade" id="week">
+                    <ul>
+                        <li><a href="">2017年有宠智能产品发布会之有宠集团</a></li>
+                        <li><a href="">狗狗牙齿崩了？磨牙棒没选对吧！</a></li>
+                        <li><a href="">黄阿玛剪指甲，又有刁民要害朕!</a></li>
+                        <li><a href="">柴犬二货老爹，这次跟儿子吵起来了</a></li>
+                        <li><a href="">猫要是智障起来，铲屎官根本拦不住</a></li>
+                        <li><a href="">下雪天遛柯基，刚出门就消失了</a></li>
+                        <li><a href="">汶川地震八年过去，“猪坚强”活得很好！</a></li>
+                        <li><a href="">九个胖子一起吃饭 又好笑又好饿</a></li>
+                    </ul>
+                </div>
+                <div class="tab-pane fade" id="day">
+                    <ul>
+                        <li><a href="">真相了！喵星与汪星的不同</a></li>
+                        <li><a href="">主人唱歌太难听狗狗当场原地晕倒</a></li>
+                        <li><a href="">动物界的多元成家</a></li>
+                        <li><a href="">九个胖子一起吃饭 又好笑又好饿</a></li>
+                        <li><a href="">狗狗的花样一家</a></li>
+                        <li><a href="">猫应该装扮颈圈还是裸奔？</a></li>
+                        <li><a href="">如何让宠物宝贝乖乖吃药！</a></li>
+                        <li><a href="">DIY猫咪锥形吊床</a></li>
+                    </ul>
+                </div>
+            </div><!--<%&#45;&#45;right-bottom&#45;&#45;%>-->
+        </div><<!--%&#45;&#45;right&#45;&#45;%>-->
+    </div><!--//contents-->
+</div><!--<%&#45;&#45;contents&#45;&#45;%>-->
+
+<div id="ad" class="col-xs-12">
+    <img src="/upload/img/image/ad1.jpg">
+    <img src="/upload/img/image/ad2.jpg">
+    <img src="/upload/img/image/ad3.jpg">
+</div>
+<div id="bottom" class="col-xs-12">
+    <img src="/upload/img/image/bottom-img1.jpg" >
+    <img src="/upload/img/image/bottom-img2.jpg" >
+    <img src="/upload/img/image/bottom-img3.jpg" >
+    <img src="/upload/img/image/bottom-img4.jpg" >
+</div>
+<div id="footer" class="col-xs-12">版权所有@江西师范大学x3513工作室<br>电话：888-8888</div>
+
+
+</body>
+</html>

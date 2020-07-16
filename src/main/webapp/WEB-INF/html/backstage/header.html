@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<!--头部样式-->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#back-nav">
+                <span class="sr-only">切换导航</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="backmain.jsp">萌宠管理员登录界面</a>
+        </div>
+        <div class="collapse navbar-collapse" id="back-nav">
+            <form class="form-group navbar-left">
+                <div class="form-inline">
+                    <input class="form-control" placeholder="Search...">
+                    <span class="glyphicon glyphicon-search"></span>
+                </div>
+            </form>
+            <div class="navbar-right dropdown">
+                <button class="btn btn-default "><span class="glyphicon glyphicon-envelope"></span></button>
+                <button class="btn btn-default" ><span class="glyphicon glyphicon-bell"></span></button>
+                <button class=" btn btn-default dropdown-toggle" data-toggle="dropdown"><img src="../upload/img/backstageimg/head.jpg" ><font style="color: #0886bf;">${loginname}</font><span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="">
+                            <img src="../upload/img/backstageimg/head.jpg">
+                            <div style="color:#3186fc;">${loginname}</div>
+                            <div><font style="color:#3186fc;">${loginname}</font>@sina.com</div>
+                            <button class="btn btn-danger">更多</button>
+                        </a>
+                    </li>
+                    <li><a href="backstage/jsp/Myinformation.jsp">我的信息</a></li>
+                    <li><a href="">账户设置</a></li>
+                    <li><a href="backstage/jsp/Login.jsp">退出</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+</body>
+</html>

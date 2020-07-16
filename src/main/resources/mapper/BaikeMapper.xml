@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wzp.pet.mapper.BaikeMapper">
+    <select id="querybaikeNum" resultType="int">
+        select count(*)
+        from baike
+        <where>
+            <if test ="queryKey!=null">
+                title like concat('%',#{queryKey},'%')
+            </if>
+        </where>
+    </select>
+    <select id="queryBaikebypage" resultType="com.wzp.pet.po.Baike">
+        SELECT
+               baike_id,
+               baike_theme,
+               baike_image,
+               baike_text,
+               baike_time
+        FROM baike
+        <where>
+            <if test ="queryKey!=null">
+                title like concat('%',#{queryKey},'%')
+            </if>
+        </where>
+        LIMIT #{rowIndex},#{pagesize}
+    </select>
+
+</mapper>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wzp.pet.mapper.ImagesMapper">
+    <select id="listImages" resultType="com.wzp.pet.po.Images">
+        select
+        images_id,
+        images
+        from
+        pet_images
+        order by images_id
+        ASC
+    </select>
+
+    <select id="queryImgById" resultType="com.wzp.pet.po.Images">
+        select
+            images_id,
+            images
+        from
+            pet_images
+        where images_id=#{imagesId}
+    </select>
+
+    <select id="queryImages" resultType="com.wzp.pet.po.Images">
+        select
+        images_id,
+        images,
+        pet_type,
+        title,
+        introduce
+        from pet_images
+        <where>
+            <if test="imagesCondition.petType!=null">
+             and  pet_type like '%${imagesCondition.petType}%'
+            </if>
+        </where>
+        order by
+        images_id
+        limit #{rowIndex},#{pageSize};
+    </select>
+
+    <select id="queryImagecount" resultType="int">
+        select count(*)
+        from pet_images
+        <where>
+            <if test="imagesCondition.petType!=null">
+                and  pet_type like '%${imagesCondition.petType}%'
+            </if>
+        </where>
+
+    </select>
+    <insert id="insertImages" parameterType="com.wzp.pet.po.Images">
+        insert
+        into pet_images(images)
+        values (#{images})
+    </insert>
+
+    <insert id="batchInsertpetImg" parameterType="java.util.List">
+        INSERT
+        INTO pet_images(images,title,
+        pet_type,introduce)
+        VALUES
+        <foreach collection="list" item="petImg" index="index"
+                 separator=",">
+            (
+            #{petImg.images},
+            #{petImg.title},
+            #{petImg.petType},
+            #{petImg.introduce}
+            )
+        </foreach>
+    </insert>
+
+
+    <update id="updateImages" parameterType="com.wzp.pet.po.Images">
+        update pet_images
+        <set>
+            <if test="images != null">images=#{images},</if>
+            <if test="petType != null">pet_type=#{petType}</if>
+        </set>
+        where images_id=#{imagesId}
+    </update>
+
+    <delete id="deleteImages">
+		DELETE FROM
+		pet_images
+		WHERE
+		images_id =
+		#{imagesId}
+	</delete>
+</mapper>

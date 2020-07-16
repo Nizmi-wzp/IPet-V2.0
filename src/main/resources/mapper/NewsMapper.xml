@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wzp.pet.mapper.NewsMapper">
+    <select id="queryNews" resultType="com.wzp.pet.po.News">
+    select
+     news_id,
+     news_title,
+     news_image,
+     news_contents,
+     news_time
+     from news
+     ORDER BY news_id
+	 ASC
+    </select>
+
+    <select id="queryNewsListPage" resultType="com.wzp.pet.po.News">
+        select
+        news_id,
+        news_title,
+        news_image,
+        news_contents,
+        news_time
+        from news
+        <where>
+            <if test="newsCondition.newsTitle!=null">
+                and  news_title like '%${newsCondition.newsTitle}%'
+            </if>
+            <if test="newsCondition.newsContents!=null">
+                and  news_contents like '%${newsCondition.newsContents}%'
+            </if>
+        </where>
+        order by
+        news_id
+        limit #{rowIndex},#{pageSize};
+    </select>
+
+    <select id="getRecordCount" resultType="int">
+        select count(*)
+        from news
+        <where>
+            <if test="newsCondition.newsTitle!=null">
+                and  news_title like '%${newsCondition.newsTitle}%'
+            </if>
+            <if test="newsCondition.newsContents!=null">
+                and  news_contents like '%${newsCondition.newsContents}%'
+            </if>
+        </where>
+
+    </select>
+
+
+    <insert id="insertNews" parameterType="com.wzp.pet.po.News">
+        INSERT
+        into
+        news(news_title,
+        news_image,
+        news_contents,
+        news_time)
+        VALUES
+        (#{newsTitle},#{newsImage},#{newsContents},#{newsTime})
+	</insert>
+</mapper>

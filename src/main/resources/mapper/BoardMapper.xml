@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wzp.pet.mapper.BoardMapper">
+    <resultMap id="boardResultMap" type="com.wzp.pet.po.Board">
+        <id column="board_id" property="boardId" />
+        <result column="board_title" property="boardTitle" />
+        <result column="board_content" property="boardContent" />
+        <result column="board_time" property="boardTime" />
+        <result column="sex" property="sex" />
+        <association property="admin" column="admin_id"
+                     javaType="com.wzp.pet.po.Admin">
+            <id column="admin_id" property="adminId" />
+        </association>
+    </resultMap>
+
+    <select id="boardList" resultType="com.wzp.pet.po.Board">
+        select
+               board_id,
+               board_title,
+               board_content,
+               board_time,
+               admin_id
+        from board
+        <where>
+            <if test="boardCondition.boardContent!=null">
+                and board_content like '%${boardCondition.boardContent}%'
+            </if>
+        </where>
+        order by board_id desc
+        limit #{rowIndex},#{pageSize};
+    </select>
+    <select id="queryBoardcount" resultType="int">
+        select
+               count(*)
+         from
+         board
+        <where>
+            <if test="boardCondition.boardContent!=null">
+                and board_content like '%${boardCondition.boardContent}%'
+            </if>
+        </where>
+    </select>
+    <insert id="publishBoard" parameterType="com.wzp.pet.po.Board">
+         insert
+         into
+         board(board_title,
+              board_content,
+              board_time,
+              admin_id)
+         values (
+                #{boardTitle},
+                #{boardContent},
+                #{boardTime},
+                #{adminId})
+    </insert>
+    <select id="newestBoard" resultType="String">
+        select board_content
+        from board
+        order by board_id DESC
+        limit 1
+    </select>
+    <delete id="delBoard" parameterType="int">
+		DELETE FROM
+		board
+		WHERE
+		board_id =
+		#{boardId}
+	</delete>
+</mapper>

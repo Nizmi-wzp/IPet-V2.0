@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新闻</title>
+    <link rel="stylesheet" href="/resources/backstage/backjs/layui-v2.4.5/layui/css/layui.css">
+    <link rel="stylesheet" href="/resources/css/back/admin.css">
+</head>
+<body class="layui-layout-body layui-bg-gray">
+<!-- 顶部导航-->
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">萌宠后台管理</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item layadmin-flexible" lay-unselect="">
+                <a title="侧边伸缩" href="javascript:;" layadmin-event="flexible">
+                    <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
+                </a>
+            </li>
+<!--            <li class="layui-nav-item"><a href="">控制台</a></li>
+            <li class="layui-nav-item"><a href="">商品管理</a></li>
+            <li class="layui-nav-item"><a href="">用户</a></li>-->
+            <li class="layui-nav-item">
+                <a href="javascript:;">其它系统</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">邮件管理</a></dd>
+                    <dd><a href="">消息管理</a></dd>
+                    <dd><a href="">授权管理</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li id="msg" class="layui-nav-item" lay-unselect="">
+                <a href="/back/message" layadmin-event="message">
+                    <i class="layui-icon layui-icon-notice"></i>
+
+                    <!-- 如果有新消息，则显示小圆点 -->
+                    <script type="text/html" template="" lay-url="./json/message/new.js">
+                        {{# if(d.data.newmsg){ }}
+                        <span class="layui-badge-dot"></span>
+                        {{# } }}
+                    </script>  <span id="msgdot" class="layui-badge-dot"></span>
+
+                </a>
+            </li>
+
+            <li class="layui-nav-item" id="myself">
+                <a href="javascript:;">个人中心<span id="dot" class="layui-badge-dot"></span></a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img" id="loginimg">
+                    <span id="loginname"></span>
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="/back/myinfo">基本资料</a></dd>
+                    <dd><a href="/back/changepwd">修改密码</a></dd>
+                </dl>
+            </li>
+            <li id="logout" class="layui-nav-item"><a href="javascript:;">退出</a></li>
+        </ul>
+    </div>
+    <!--左侧导航-->
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed" id="superadmin">
+                    <a class="" href="javascript:;"><i class="layui-icon layui-icon-component"></i>管理员管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/back/adminmanager">管理员信息</a></dd>
+                        <!--<dd><a href="javascript:;">权限管理</a></dd>-->
+                        <dd id="inform"><a href="javascript:;">发布公告</a></dd>
+                        <!--<dd><a href="/back/adminmanager">其他管理</a></dd>-->
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">主页</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/back/index">主页一</a></dd>
+                        <dd><a href="/back/baidu">内嵌页面</a></dd>
+                        <dd><a href="/back/404">404页面</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="/back/newsmanager">资讯管理</a></li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">贴吧管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/back/postmanager">帖子列表</a></dd>
+                        <dd><a href="/back/replymanager">回帖列表</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="/back/usermanager">用户管理</a></li>
+                <li class="layui-nav-item"><a href="/back/imagesmanager">图片管理</a></li>
+                <li class="layui-nav-item"><a href="/back/videomanager">视频管理</a></li>
+                <li class="layui-nav-item"><a href="/back/location">地图定位</a></li>
+            </ul>
+        </div>
+    </div>
+    <!--主体内容区-->
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">
+            <!--面包屑导航-->
+            <div class="layui-card layadmin-header">
+                <div class="layui-breadcrumb" lay-filter="breadcrumb" style="visibility: visible;">
+                    <a href="/back/index">主页</a><span lay-separator="">/</span>
+                    <a><cite>新闻管理</cite></a><span lay-separator="">/</span>
+
+                </div>
+            </div>
+            <div class="layui-fluid">
+                <div class="layui-card">
+                    <div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="app-content-list">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">文章ID</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">标题</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="title" placeholder="请输入" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">内容</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="author" placeholder="请输入" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+
+                            <div class="layui-inline">
+                                <label class="layui-form-label">发布时间</label>
+                                <div class="layui-input-inline">
+                                    <select name="label">
+                                        <option value="">请选择时间</option>
+                                        <option value="0">2016</option>
+                                        <option value="1">2017</option>
+                                        <option value="2">2018</option>
+                                        <option value="3">2019</option>
+                                    </select><div class="layui-unselect layui-form-select"><div class="layui-select-title"><input type="text" placeholder="请选择标签" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit"><dd lay-value="" class="layui-select-tips">请选择标签</dd><dd lay-value="0" class="">美食</dd><dd lay-value="1" class="">新闻</dd><dd lay-value="2" class="">八卦</dd><dd lay-value="3" class="">体育</dd><dd lay-value="4" class="">音乐</dd></dl></div>
+                                </div>
+                            </div>
+                            <div class="layui-input-block">
+                                <button class="layui-btn  layuiadmin-btn-list" lay-submit="" lay-filter="LAY-app-contlist-search">
+                                    <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-card-body" style="margin-top: 5em">
+                        <div style="padding-bottom: 10px;" class="">
+                            <!--<button class="layui-btn layuiadmin-btn-list" data-type="add">添加</button>-->
+                        </div>
+
+                        <table class="layui-hide" id="newslist" lay-filter="test"></table>
+                        <script type="text/html" id="barDemo">
+                            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+                            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                        </script>
+
+<!--                        <table id="LAY-app-content-list" lay-filter="LAY-app-content-list"></table>
+                        <div class="layui-form layui-border-box layui-table-view" lay-filter="LAY-table-16" lay-id="LAY-app-content-list" style=" ">
+                            <div class="layui-table-box">
+                                <div class="layui-table-header">
+                                    <table class="layui-table" cellspacing="0" cellpadding="0" border="0">
+                                        <thead>
+                                        <tr>
+                                            <th data-field="0" data-key="16-0-0" data-unresize="true" class=" layui-table-col-special">
+                                                <div class="layui-table-cell laytable-cell-16-0-0 laytable-cell-checkbox">
+                                                    <input type="checkbox" name="layTableCheckbox" lay-skin="primary" lay-filter="layTableAllChoose">
+                                                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
+                                                        <i class="layui-icon layui-icon-ok"></i>
+                                                    </div></div>
+                                            </th>
+                                            <th data-field="id" data-key="16-0-1" class=" layui-unselect">
+                                                <div class="layui-table-cell laytable-cell-16-0-1">
+                                                    <span>文章ID</span>
+                                                    <span class="layui-table-sort layui-inline">
+                                                        <i class="layui-edge layui-table-sort-asc" title="升序"></i>
+                                                        <i class="layui-edge layui-table-sort-desc" title="降序"></i>
+                                                    </span>
+                                                </div>
+                                            </th>
+                                            <th data-field="label" data-key="16-0-2" data-minwidth="100" class="">
+                                                <div class="layui-table-cell laytable-cell-16-0-2">
+                                                    <span>文章标签</span>
+                                                </div>
+                                            </th>
+                                            <th data-field="title" data-key="16-0-3" class="">
+                                                <div class="layui-table-cell laytable-cell-16-0-3">
+                                                    <span>文章标题</span>
+                                                </div>
+                                            </th>
+                                            <th data-field="author" data-key="16-0-4" class="">
+                                                <div class="layui-table-cell laytable-cell-16-0-4">
+                                                    <span>
+                                                    作者
+                                                    </span>
+                                                </div>
+                                            </th>
+                                            <th data-field="uploadtime" data-key="16-0-5" class=" layui-unselect">
+                                                <div class="layui-table-cell laytable-cell-16-0-5"><span>上传时间</span><span class="layui-table-sort layui-inline"><i class="layui-edge layui-table-sort-asc" title="升序"></i><i class="layui-edge layui-table-sort-desc" title="降序"></i></span></div></th><th data-field="status" data-key="16-0-6" data-minwidth="80" class=""><div class="layui-table-cell laytable-cell-16-0-6" align="center"><span>发布状态</span></div></th><th data-field="7" data-key="16-0-7" data-minwidth="150" class=" layui-table-col-special"><div class="layui-table-cell laytable-cell-16-0-7" align="center"><span>操作</span></div></th></tr></thead></table></div><div class="layui-table-body layui-table-main"><table class="layui-table" cellspacing="0" cellpadding="0" border="0"><tbody><tr data-index="0" class=""><td data-field="0" data-key="16-0-0" class="layui-table-col-special"><div class="layui-table-cell laytable-cell-16-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div></div></td><td data-field="id" data-key="16-0-1" class=""><div class="layui-table-cell laytable-cell-16-0-1">001</div></td><td data-field="label" data-key="16-0-2" data-minwidth="100" class=""><div class="layui-table-cell laytable-cell-16-0-2">美食</div></td><td data-field="title" data-key="16-0-3" class=""><div class="layui-table-cell laytable-cell-16-0-3">舌尖上的中国第一季</div></td><td data-field="author" data-key="16-0-4" class=""><div class="layui-table-cell laytable-cell-16-0-4">作者-1</div></td><td data-field="uploadtime" data-key="16-0-5" class=""><div class="layui-table-cell laytable-cell-16-0-5">20121204</div></td><td data-field="status" data-key="16-0-6" data-content="true" data-minwidth="80" class="" align="center"><div class="layui-table-cell laytable-cell-16-0-6">  <button class="layui-btn layui-btn-xs">已发布</button>  </div></td><td data-field="7" data-key="16-0-7" data-off="true" data-minwidth="150" class="layui-table-col-special" align="center"><div class="layui-table-cell laytable-cell-16-0-7"> <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a> <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a> </div></td></tr><tr data-index="1" class=""><td data-field="0" data-key="16-0-0" class="layui-table-col-special"><div class="layui-table-cell laytable-cell-16-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div></div></td><td data-field="id" data-key="16-0-1" class=""><div class="layui-table-cell laytable-cell-16-0-1">002</div></td><td data-field="label" data-key="16-0-2" data-minwidth="100" class=""><div class="layui-table-cell laytable-cell-16-0-2">美食</div></td><td data-field="title" data-key="16-0-3" class=""><div class="layui-table-cell laytable-cell-16-0-3">舌尖上的中国第二季</div></td><td data-field="author" data-key="16-0-4" class=""><div class="layui-table-cell laytable-cell-16-0-4">作者-2</div></td><td data-field="uploadtime" data-key="16-0-5" class=""><div class="layui-table-cell laytable-cell-16-0-5">20141204</div></td><td data-field="status" data-key="16-0-6" data-content="false" data-minwidth="80" class="" align="center"><div class="layui-table-cell laytable-cell-16-0-6">  <button class="layui-btn layui-btn-primary layui-btn-xs">待修改</button>  </div></td><td data-field="7" data-key="16-0-7" data-off="true" data-minwidth="150" class="layui-table-col-special" align="center"><div class="layui-table-cell laytable-cell-16-0-7"> <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a> <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a> </div></td></tr><tr data-index="2" class=""><td data-field="0" data-key="16-0-0" class="layui-table-col-special"><div class="layui-table-cell laytable-cell-16-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div></div></td><td data-field="id" data-key="16-0-1" class=""><div class="layui-table-cell laytable-cell-16-0-1">003</div></td><td data-field="label" data-key="16-0-2" data-minwidth="100" class=""><div class="layui-table-cell laytable-cell-16-0-2">美食</div></td><td data-field="title" data-key="16-0-3" class=""><div class="layui-table-cell laytable-cell-16-0-3">舌尖上的中国第三季</div></td><td data-field="author" data-key="16-0-4" class=""><div class="layui-table-cell laytable-cell-16-0-4">作者-3</div></td><td data-field="uploadtime" data-key="16-0-5" class=""><div class="layui-table-cell laytable-cell-16-0-5">20161204</div></td><td data-field="status" data-key="16-0-6" data-content="false" data-minwidth="80" class="" align="center"><div class="layui-table-cell laytable-cell-16-0-6">  <button class="layui-btn layui-btn-primary layui-btn-xs">待修改</button>  </div></td><td data-field="7" data-key="16-0-7" data-off="true" data-minwidth="150" class="layui-table-col-special" align="center"><div class="layui-table-cell laytable-cell-16-0-7"> <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a> <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a> </div></td></tr><tr data-index="3" class=""><td data-field="0" data-key="16-0-0" class="layui-table-col-special"><div class="layui-table-cell laytable-cell-16-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div></div></td><td data-field="id" data-key="16-0-1" class=""><div class="layui-table-cell laytable-cell-16-0-1">004</div></td><td data-field="label" data-key="16-0-2" data-minwidth="100" class=""><div class="layui-table-cell laytable-cell-16-0-2">历史</div></td><td data-field="title" data-key="16-0-3" class=""><div class="layui-table-cell laytable-cell-16-0-3">诸葛亮骂王朗</div></td><td data-field="author" data-key="16-0-4" class=""><div class="layui-table-cell laytable-cell-16-0-4">作者-1</div></td><td data-field="uploadtime" data-key="16-0-5" class=""><div class="layui-table-cell laytable-cell-16-0-5">20180201</div></td><td data-field="status" data-key="16-0-6" data-content="false" data-minwidth="80" class="" align="center"><div class="layui-table-cell laytable-cell-16-0-6">  <button class="layui-btn layui-btn-primary layui-btn-xs">待修改</button>  </div></td><td data-field="7" data-key="16-0-7" data-off="true" data-minwidth="150" class="layui-table-col-special" align="center"><div class="layui-table-cell laytable-cell-16-0-7"> <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a> <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a> </div></td></tr><tr data-index="4" class=""><td data-field="0" data-key="16-0-0" class="layui-table-col-special"><div class="layui-table-cell laytable-cell-16-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div></div></td><td data-field="id" data-key="16-0-1" class=""><div class="layui-table-cell laytable-cell-16-0-1">005</div></td><td data-field="label" data-key="16-0-2" data-minwidth="100" class=""><div class="layui-table-cell laytable-cell-16-0-2">新闻</div></td><td data-field="title" data-key="16-0-3" class=""><div class="layui-table-cell laytable-cell-16-0-3">新时代特色中国梦</div></td><td data-field="author" data-key="16-0-4" class=""><div class="layui-table-cell laytable-cell-16-0-4">作者-1</div></td><td data-field="uploadtime" data-key="16-0-5" class=""><div class="layui-table-cell laytable-cell-16-0-5">20180512</div></td><td data-field="status" data-key="16-0-6" data-content="false" data-minwidth="80" class="" align="center"><div class="layui-table-cell laytable-cell-16-0-6">  <button class="layui-btn layui-btn-primary layui-btn-xs">待修改</button>  </div></td><td data-field="7" data-key="16-0-7" data-off="true" data-minwidth="150" class="layui-table-col-special" align="center"><div class="layui-table-cell laytable-cell-16-0-7"> <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a> <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a> </div></td></tr><tr data-index="5" class=""><td data-field="0" data-key="16-0-0" class="layui-table-col-special"><div class="layui-table-cell laytable-cell-16-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div></div></td><td data-field="id" data-key="16-0-1" class=""><div class="layui-table-cell laytable-cell-16-0-1">006</div></td><td data-field="label" data-key="16-0-2" data-minwidth="100" class=""><div class="layui-table-cell laytable-cell-16-0-2">新闻</div></td><td data-field="title" data-key="16-0-3" class=""><div class="layui-table-cell laytable-cell-16-0-3">新时代特色中国梦</div></td><td data-field="author" data-key="16-0-4" class=""><div class="layui-table-cell laytable-cell-16-0-4">作者-2</div></td><td data-field="uploadtime" data-key="16-0-5" class=""><div class="layui-table-cell laytable-cell-16-0-5">20180514</div></td><td data-field="status" data-key="16-0-6" data-content="false" data-minwidth="80" class="" align="center"><div class="layui-table-cell laytable-cell-16-0-6">  <button class="layui-btn layui-btn-primary layui-btn-xs">待修改</button>  </div></td><td data-field="7" data-key="16-0-7" data-off="true" data-minwidth="150" class="layui-table-col-special" align="center"><div class="layui-table-cell laytable-cell-16-0-7"> <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a> <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a> </div></td></tr><tr data-index="6" class=""><td data-field="0" data-key="16-0-0" class="layui-table-col-special"><div class="layui-table-cell laytable-cell-16-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div></div></td><td data-field="id" data-key="16-0-1" class=""><div class="layui-table-cell laytable-cell-16-0-1">007</div></td><td data-field="label" data-key="16-0-2" data-minwidth="100" class=""><div class="layui-table-cell laytable-cell-16-0-2">体育</div></td><td data-field="title" data-key="16-0-3" class=""><div class="layui-table-cell laytable-cell-16-0-3">皇马大战利物浦</div></td><td data-field="author" data-key="16-0-4" class=""><div class="layui-table-cell laytable-cell-16-0-4">作者-3</div></td><td data-field="uploadtime" data-key="16-0-5" class=""><div class="layui-table-cell laytable-cell-16-0-5">20180515</div></td><td data-field="status" data-key="16-0-6" data-content="false" data-minwidth="80" class="" align="center"><div class="layui-table-cell laytable-cell-16-0-6">  <button class="layui-btn layui-btn-primary layui-btn-xs">待修改</button>  </div></td><td data-field="7" data-key="16-0-7" data-off="true" data-minwidth="150" class="layui-table-col-special" align="center"><div class="layui-table-cell laytable-cell-16-0-7"> <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a> <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a> </div></td></tr></tbody></table></div><div class="layui-table-fixed layui-table-fixed-l"><div class="layui-table-header"><table class="layui-table" cellspacing="0" cellpadding="0" border="0"><thead><tr><th data-field="0" data-key="16-0-0" data-unresize="true" class=" layui-table-col-special"><div class="layui-table-cell laytable-cell-16-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary" lay-filter="layTableAllChoose"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div></div></th></tr></thead></table></div><div class="layui-table-body" style="height: 273px;"><table class="layui-table" cellspacing="0" cellpadding="0" border="0"><tbody><tr data-index="0" class=""><td data-field="0" data-key="16-0-0" class="layui-table-col-special"><div class="layui-table-cell laytable-cell-16-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div></div></td></tr><tr data-index="1" class=""><td data-field="0" data-key="16-0-0" class="layui-table-col-special"><div class="layui-table-cell laytable-cell-16-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div></div></td></tr><tr data-index="2" class=""><td data-field="0" data-key="16-0-0" class="layui-table-col-special"><div class="layui-table-cell laytable-cell-16-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div></div></td></tr><tr data-index="3" class=""><td data-field="0" data-key="16-0-0" class="layui-table-col-special"><div class="layui-table-cell laytable-cell-16-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div></div></td></tr><tr data-index="4" class=""><td data-field="0" data-key="16-0-0" class="layui-table-col-special"><div class="layui-table-cell laytable-cell-16-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div></div></td></tr><tr data-index="5" class=""><td data-field="0" data-key="16-0-0" class="layui-table-col-special"><div class="layui-table-cell laytable-cell-16-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div></div></td></tr><tr data-index="6" class=""><td data-field="0" data-key="16-0-0" class="layui-table-col-special"><div class="layui-table-cell laytable-cell-16-0-0 laytable-cell-checkbox"><input type="checkbox" name="layTableCheckbox" lay-skin="primary"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div></div></td></tr></tbody></table></div></div><div class="layui-table-fixed layui-table-fixed-r layui-hide" style="right: -1px;"><div class="layui-table-header"><table class="layui-table" cellspacing="0" cellpadding="0" border="0"><thead><tr><th data-field="7" data-key="16-0-7" data-minwidth="150" class=" layui-table-col-special"><div class="layui-table-cell laytable-cell-16-0-7" align="center"><span>操作</span></div></th></tr></thead></table><div class="layui-table-mend"></div></div><div class="layui-table-body" style="height: 273px;"><table class="layui-table" cellspacing="0" cellpadding="0" border="0"><tbody><tr data-index="0" class=""><td data-field="7" data-key="16-0-7" data-off="true" data-minwidth="150" class="layui-table-col-special" align="center"><div class="layui-table-cell laytable-cell-16-0-7"> <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a> <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a> </div></td></tr><tr data-index="1" class=""><td data-field="7" data-key="16-0-7" data-off="true" data-minwidth="150" class="layui-table-col-special" align="center"><div class="layui-table-cell laytable-cell-16-0-7"> <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a> <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a> </div></td></tr><tr data-index="2" class=""><td data-field="7" data-key="16-0-7" data-off="true" data-minwidth="150" class="layui-table-col-special" align="center"><div class="layui-table-cell laytable-cell-16-0-7"> <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a> <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a> </div></td></tr><tr data-index="3" class=""><td data-field="7" data-key="16-0-7" data-off="true" data-minwidth="150" class="layui-table-col-special" align="center"><div class="layui-table-cell laytable-cell-16-0-7"> <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a> <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a> </div></td></tr><tr data-index="4" class=""><td data-field="7" data-key="16-0-7" data-off="true" data-minwidth="150" class="layui-table-col-special" align="center"><div class="layui-table-cell laytable-cell-16-0-7"> <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a> <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a> </div></td></tr><tr data-index="5" class=""><td data-field="7" data-key="16-0-7" data-off="true" data-minwidth="150" class="layui-table-col-special" align="center"><div class="layui-table-cell laytable-cell-16-0-7"> <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a> <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a> </div></td></tr><tr data-index="6" class=""><td data-field="7" data-key="16-0-7" data-off="true" data-minwidth="150" class="layui-table-col-special" align="center"><div class="layui-table-cell laytable-cell-16-0-7"> <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a> <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a> </div></td></tr></tbody></table></div></div></div><div class="layui-table-page"><div id="layui-table-page16"><div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-17"><a href="javascript:;" class="layui-laypage-prev" data-page="9"><i class="layui-icon"></i></a><a href="javascript:;" class="layui-laypage-first" data-page="1" title="首页">1</a><span class="layui-laypage-spr">…</span><a href="javascript:;" data-page="8">8</a><a href="javascript:;" data-page="9">9</a><span class="layui-laypage-curr"><em class="layui-laypage-em"></em><em>10</em></span><a href="javascript:;" class="layui-laypage-next layui-disabled" data-page="11"><i class="layui-icon"></i></a><span class="layui-laypage-skip">到第<input type="text" min="1" value="10" class="layui-input">页<button type="button" class="layui-laypage-btn">确定</button></span><span class="layui-laypage-count">共 100 条</span><span class="layui-laypage-limits"><select lay-ignore=""><option value="10" selected="">10 条/页</option><option value="15">15 条/页</option><option value="20">20 条/页</option><option value="25">25 条/页</option><option value="30">30 条/页</option></select></span></div></div></div><style>.laytable-cell-16-0-0{ width: 48px; }.laytable-cell-16-0-1{ width: 100px; }.laytable-cell-16-0-2{  }.laytable-cell-16-0-3{  }.laytable-cell-16-0-4{  }.laytable-cell-16-0-5{  }.laytable-cell-16-0-6{  }.laytable-cell-16-0-7{  }</style></div>
+                        <script type="text/html" id="buttonTpl">
+                            {{#  if(d.status){ }}
+                            <button class="layui-btn layui-btn-xs">已发布</button>
+                            {{#  } else { }}
+                            <button class="layui-btn layui-btn-primary layui-btn-xs">待修改</button>
+                            {{#  } }}
+                        </script>-->
+                        <script type="text/html" id="table-content-list">
+                            <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
+                            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © www.Ipet.com - 萌宠信息平台
+        时间：<span id="time" ></span>
+    </div>
+</div>
+<script src="/resources/backstage/backjs/layui-v2.4.5/layui/layui.js"></script>
+<script>
+    //JavaScript代码区域
+    layui.use(['element','layer', 'laypage', 'laydate'], function(){
+        var element = layui.element;//模块预加载
+        var layer = layui.layer;
+        var laypage=layui.laypage;
+        var laydate=layui.laydate;
+
+        //传入Date对象给初始值
+        laydate.render({
+            elem: '#time'
+            ,type: 'datetime'
+            ,value: new Date()
+        });
+
+    });
+
+
+
+</script>
+<script type="text/javascript" src="../resources/backstage/backjs/jquery-3.3.1.min.js"></script>
+<script src="/resources/js/back/index.js"></script>
+<script src="/resources/js/back/logout.js"></script>
+<script src="/resources/js/back/newsmanager.js"></script>
+</body>
+</html>

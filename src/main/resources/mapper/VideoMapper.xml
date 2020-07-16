@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wzp.pet.mapper.VideoMapper">
+    <select id="queryVideo" resultType="com.wzp.pet.po.Video">
+        select
+        video_id,
+        video_type,
+        video,
+        title,
+        publish_time,
+        click
+        from video
+        order by
+        video_id
+        ASC
+    </select>
+    <select id="videoClick" resultType="com.wzp.pet.po.view.Video_click">
+        select video_type,
+               clicks
+        from video_click
+    </select>
+
+
+
+    <update id="updateVideoClick">
+        UPDATE  video
+        set Click=click+1
+        where video_id=#{videoId}
+    </update>
+
+
+    <select id="queryVideoById" resultType="com.wzp.pet.po.Video">
+        select
+            Video_id,
+            Video_type,
+            Video,
+            Title,
+            Click,
+            Publish_time
+        from video
+        where video_id=#{videoId}
+    </select>
+
+    <select id="queryVideoList" resultType="com.wzp.pet.po.Video">
+        select
+            Video_id,
+            Video_type,
+            Video,
+            Title,
+            Click,
+            Publish_time
+        from
+        video
+        <where>
+            <if test="videoCondition.videoId!=null">
+                and  video_id =#{videoCondition.videoId}
+            </if>
+            <if test="videoCondition.videoType!=null">
+                and  video_type like '%${videoCondition.videoType}%'
+            </if>
+            <if test="videoCondition.title!=null">
+                and  title =#{title}
+            </if>
+        </where>
+        limit #{rowIndex},#{pageSize}
+    </select>
+
+    <select id="querynumber" resultType="int">
+        select count(*)
+        from
+        video
+        <where>
+            <if test="videoCondition.videoId!=null">
+                and  video_id =#{videoCondition.videoId}
+            </if>
+            <if test="videoCondition.videoType!=null">
+                and  video_type like '%${videoCondition.videoType}%'
+            </if>
+            <if test="videoCondition.title!=null">
+                and  title =#{title}
+            </if>
+        </where>
+    </select>
+    <delete id="delVideo">
+		DELETE FROM
+		video
+		WHERE
+		video_id =
+		#{videoId}
+	</delete>
+
+
+</mapper>

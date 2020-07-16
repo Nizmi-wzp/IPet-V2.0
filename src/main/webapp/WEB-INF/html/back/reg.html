@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>萌宠后台注册界面</title>
+    <link rel="stylesheet" href="/resources/backstage/backjs/layui-v2.4.5/layui/css/layui.css">
+    <link rel="stylesheet" href="/resources/css/back/login.css">
+</head>
+<body class="layui-layout-body" >
+<div>
+    <div class="layadmin-user-login-main login-main" >
+        <div class="layadmin-user-login-box layadmin-user-login-header">
+            <h2>管理员注册</h2>
+            <p>萌宠信息后台管理系统</p>
+        </div>
+        <div class="layadmin-user-login-box layadmin-user-login-body layui-form layui-form-pane">
+            <div class="layui-form-item">
+                <label class="layui-form-label layadmin-user-login-icon layui-icon layui-icon-username" for="LAY-user-login-cellphone"></label>
+                <div class="layui-input-block">
+                    <input type="text" name="adminname" id="LAY-user-login-adminName" lay-verify="username" placeholder="账户" class="layui-input">
+                    <span style="color: #ccc">标准格式：ipet_***</span>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                    <label class="layui-form-label layadmin-user-login-icon layui-icon layui-icon-cellphone" for="LAY-user-login-cellphone"></label>
+                <div class="layui-input-block">
+                    <input type="text" name="cellphone" id="LAY-user-login-cellphone" lay-verify="phone" maxlength="11" placeholder="手机" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-row">
+                    <div class="layui-col-xs7">
+                        <label class="layui-form-label layadmin-user-login-icon layui-icon layui-icon-vercode" for="LAY-user-login-vercode"></label>
+                        <div class="layui-input-block">
+                        <input type="text" id="vercode"  name="vercode" id="LAY-user-login-vercode" maxlength="6" lay-verify="required" placeholder="验证码" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-col-xs5">
+                        <div style="margin-left: 10px;">
+                            <button type="button" class="layui-btn layui-btn-primary layui-btn-fluid" id="LAY-user-reg-getsmscode">获取验证码</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">选择角色</label>
+                <div class="layui-input-block">
+                    <select id="role" name="city" lay-verify="required" >
+                        <option disabled value="0">超级管理员</option>
+                        <option value="1">普通管理员</option>
+                        <option value="2">编辑人员</option>
+                        <option value="3">审核员</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"></label>
+                <div class="layui-input-block">
+                <input type="password" name="password" id="LAY-user-login-password" lay-verify="pass" placeholder="密码" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label " for="LAY-user-login-nickname">昵称</label>
+                <div class="layui-input-block">
+                <input type="text" name="nickname" id="LAY-user-login-nickname" lay-verify="nickname" placeholder="昵称" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block" style="margin-left: -0.6em">
+                <input type="checkbox" name="agreement" lay-skin="primary" title="同意用户协议" checked=""><div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>同意用户协议</span><i class="layui-icon layui-icon-ok"></i></div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <button id="adminlogin" class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="LAY-user-reg-submit">注 册</button>
+            </div>
+            <div class="layui-trans layui-form-item layadmin-user-login-other">
+                <label>社交账号注册</label>
+                <a href="javascript:;"><i class="layui-icon layui-icon-login-qq"></i></a>
+                <a href="javascript:;"><i class="layui-icon layui-icon-login-wechat"></i></a>
+                <a href="javascript:;"><i class="layui-icon layui-icon-login-weibo"></i></a>
+
+                <a href="/back/login" class="layadmin-user-jump-change layadmin-link layui-hide-xs">用已有帐号登入</a>
+                <a href="javascript:;" class="layadmin-user-jump-change layadmin-link layui-hide-sm layui-show-xs-inline-block">登入</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript" src="../resources/backstage/backjs/jquery-3.3.1.min.js"></script>
+<script src="/resources/backstage/backjs/layui-v2.4.5/layui/layui.js"></script>
+<script src="/resources/js/back/reg.js"></script>
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+        form.on('select(password)', function(data){
+            console.log(data);
+        });
+    });
+    form.verify({
+        username: function(value, item){ //value：表单的值、item：表单的DOM对象
+            if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){
+                return '用户名不能有特殊字符';
+            }
+            if(/(^\_)|(\__)|(\_+$)/.test(value)){
+                return '用户名首尾不能出现下划线\'_\'';
+            }
+            if(/^\d+\d+\d$/.test(value)){
+                return '用户名不能全为数字';
+            }
+        }
+
+        //我们既支持上述函数式的方式，也支持下述数组的形式
+        //数组的两个值分别代表：[正则匹配、匹配不符时的提示文字]
+        ,pass: [
+            /^[\S]{6,12}$/
+            ,'密码必须6到12位，且不能出现空格'
+        ]
+    });
+    form.val("formlogin", {
+        "adminname": "贤心" // "name": "value"
+        ,"password": "666"
+
+    })
+</script>
+
+
+</body>
+</html>

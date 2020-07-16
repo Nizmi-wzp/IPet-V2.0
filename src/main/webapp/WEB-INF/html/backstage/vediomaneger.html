@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>视频管理</title>
+    <link rel="stylesheet" href="../resources/backstage/backcss/bootstrap.css">
+    <script type="text/javascript" src="../resources/backstage/backjs/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../resources/backstage/backjs/bootstrap.js"></script>
+    <link rel="stylesheet" href="../resources/backstage/backcss/main.css">
+    <style type="text/css">
+        #vediolist li{width: 180px;height: 160px;border: 1px solid #ccc;float: left;}
+        #vediolist li embed{width: 100px;height: 100px;border: #1b6d85 1px dashed;display: block;}
+    </style>
+    <script>
+
+        $("button").click(function () {
+            alert("确认删除！");
+        })
+    </script>
+</head>
+<body>
+<!--头部样式-->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#back-nav">
+                <span class="sr-only">切换导航</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="backmain.jsp">萌宠管理员登录界面</a>
+        </div>
+        <div class="collapse navbar-collapse" id="back-nav">
+            <form class="form-group navbar-left">
+                <div class="form-inline">
+                    <input class="form-control" placeholder="Search...">
+                    <span class="glyphicon glyphicon-search"></span>
+                </div>
+            </form>
+            <div class="navbar-right dropdown">
+                <button class="btn btn-default "><span class="glyphicon glyphicon-envelope"></span></button>
+                <button class="btn btn-default" ><span class="glyphicon glyphicon-bell"></span></button>
+                <button class=" btn btn-default dropdown-toggle" data-toggle="dropdown"><img src="../upload/img/backstageimg/head.jpg" ><font style="color: #0886bf;">${loginname}</font><span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="">
+                            <img src="../upload/img/backstageimg/head.jpg">
+                            <div style="color:#3186fc;">${loginname}</div>
+                            <div><font style="color:#3186fc;">${loginname}</font>@sina.com</div>
+                            <button class="btn btn-danger">更多</button>
+                        </a>
+                    </li>
+                    <li><a href="backstage/jsp/Myinformation.jsp">我的信息</a></li>
+                    <li><a href="">账户设置</a></li>
+                    <li><a href="backstage/jsp/Login.jsp">退出</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div id="wrap" class="container-fluid">
+    <div id="left" class="col-md-3 ">
+        <h3>萌宠管理员登录界面</h3>
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
+                    <a class="panel-title" data-target="#collapseOne">
+                        <img src="../upload/img/backstageimg/head.jpg"><i>${loginname}</i>Administrator<span class="caret"></span>
+                    </a>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <ul>
+                            <li><a href="backstage/jsp/Myinformation.jsp">个人信息</a></li>
+                            <li><a href="backstage/jsp/AdminLimit.jsp">权限管理</a></li>
+                            <li><a href="#">账户管理</a></li>
+                        </ul>
+                    </div><!--<%&#45;&#45;pannel-body&#45;&#45;%>-->
+                </div><!--<%&#45;&#45;collapseOne&#45;&#45;%>-->
+            </div><!--<%&#45;&#45;panel-default&#45;&#45;%>-->
+        </div><!--<%&#45;&#45;panel-group&#45;&#45;%>-->
+        <div>
+            <ul id="manager">
+                <li><a href="/backstage/adminmaneger">管理员管理<span class="number">20</span></a></li>
+                <li><a href="/backstage/backmain">主页<span class="number">4</span></a></li>
+                <li><a href="/backstage/newsmaneger">资讯管理<span class="number">10</span></a></li>
+                <li><a href="/backstage/postmaneger">贴吧管理<span class="number">6</span></a></li>
+                <li><a href="/backstage/usermaneger">用户管理<span class="number">2</span></a></li>
+                <li><a href="/backstage/imagesmaneger">图片管理</a></li>
+                <li><a href="/backstage/vediomaneger">视频管理</a></li>
+                <li><a href="/backstage/shoppingmaneger">购物管理</a></li>
+                <li><a href="/backstage/adoptmaneger">领养管理</a></li>
+                <li><a href="/backstage/echartmaneger">图表显示</a></li>
+                <li><a href="/backstage/petmap">地图定位</a></li>
+                <button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#myModal">模态框公告栏</button>
+                <!-- 模态框（Modal） -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content" >
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
+                            </div>
+                            <div class="modal-body">在这里添加一些文本</div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <button type="button" class="btn btn-primary">提交更改</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+            </ul>
+
+        </div>
+    </div>
+    <div id="right" class="col-md-9">
+        <div>
+            <h2>宠物视频管理</h2>
+            <ul id="vediolist">
+                <!--<c:forEach var="v" items="${vediolist}">
+                    <li><embed src="${v.vedio}"><button class="btn btn-danger">删除</button><button class="btn btn-info">修改</button></li>
+                </c:forEach>-->
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../resources/backstage/backjs/vediomanager.js"></script>
+</body>
+
+</html>

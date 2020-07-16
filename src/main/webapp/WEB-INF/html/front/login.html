@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>萌宠网登录</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type='text/javascript'
+            src='../resources/js/common/jquery-confirm.js' charset='utf-8'></script>
+    <link rel="stylesheet" href="/resources/css/jquery-confirm.css">
+    <style type="text/css">
+        #wrap{width: 100%;height:500px;background: url("/upload/img/image/login-bg.jpg");background-repeat: no-repeat; background-position: 200px 100px;}
+        form{width: 500px;height: 500px;border: 1px solid #cc720b;text-align: center;padding: 150px;}
+        i{color: #c77d0e;}
+        .bu{position: absolute; left: 52%;}
+        #login-bottom{background: url("/upload/img/image/login-bg-body.gif");background-repeat: repeat-x;width: 100%;height:72px;}
+        div.bu a{color: #fff;}
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <div class="col-md-6">
+        <img src="/upload/img/image/logo.jpg">
+    </div>
+
+        <h2>带个<i>萌宠</i>回家</h2>
+        <div class="form-inline">
+            <span class="glyphicon glyphicon-user"></span>
+            <input class="form-control" placeholder="请输入用户名" name="username" id="userName">
+        </div>
+        <div class="form-inline">
+            <span class="glyphicon glyphicon-lock"></span>
+            <input class="form-control" placeholder="请输入密码" type="password" id="userPWD">
+        </div>
+        <div class="bu">
+            <input type="checkbox">萌宠保密协议<a href="">忘记密码</a><br>
+            <button id="submit" class="btn  btn-primary" type="submit"><a href="#">登录</a></button>
+            <button class="btn  btn-danger"><a href="register">注册</a></button>
+            <button class="btn btn-success" ><a href="#">自服务</a></button>
+        </div>
+</div>
+<div id="login-bottom"></div>
+
+</body>
+<script type='text/javascript'
+        src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript'
+        src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+<script type='text/javascript'
+        src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+<script type='text/javascript'
+        src='../resources/js/userlogin.js' charset='utf-8'></script>
+
+</html>

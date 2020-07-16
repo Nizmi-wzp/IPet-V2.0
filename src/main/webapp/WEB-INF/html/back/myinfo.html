@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息</title>
+    <link rel="stylesheet" href="/resources/backstage/backjs/layui-v2.4.5/layui/css/layui.css">
+    <link rel="stylesheet" href="/resources/css/back/admin.css">
+</head>
+<body class="layui-layout-body layui-bg-gray">
+<!-- 顶部导航-->
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">萌宠后台管理</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item layadmin-flexible" lay-unselect="">
+                <a title="侧边伸缩" href="javascript:;" layadmin-event="flexible">
+                    <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
+                </a>
+            </li>
+<!--            <li class="layui-nav-item"><a href="">控制台</a></li>
+            <li class="layui-nav-item"><a href="">商品管理</a></li>
+            <li class="layui-nav-item"><a href="">用户</a></li>-->
+            <li class="layui-nav-item">
+                <a href="javascript:;">其它系统</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">邮件管理</a></dd>
+                    <dd><a href="">消息管理</a></dd>
+                    <dd><a href="">授权管理</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li id="msg" class="layui-nav-item" lay-unselect="">
+                <a href="/back/message" layadmin-event="message">
+                    <i class="layui-icon layui-icon-notice"></i>
+
+                    <!-- 如果有新消息，则显示小圆点 -->
+                    <script type="text/html" template="" lay-url="./json/message/new.js">
+                        {{# if(d.data.newmsg){ }}
+                        <span class="layui-badge-dot"></span>
+                        {{# } }}
+                    </script>  <span id="msgdot" class="layui-badge-dot"></span>
+
+                </a>
+            </li>
+
+            <li class="layui-nav-item" id="myself">
+                <a href="javascript:;">个人中心<span id="dot" class="layui-badge-dot"></span></a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img" id="loginimg">
+                    <span id="loginname"></span>
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="/back/myinfo">基本资料</a></dd>
+                    <dd><a href="/back/changepwd">修改密码</a></dd>
+                </dl>
+            </li>
+            <li id="logout" class="layui-nav-item"><a href="javascript:;">退出</a></li>
+        </ul>
+    </div>
+    <!--左侧导航-->
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed" id="superadmin">
+                    <a class="" href="javascript:;"><i class="layui-icon layui-icon-component"></i>管理员管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/back/adminmanager">管理员信息</a></dd>
+                        <!--<dd><a href="javascript:;">权限管理</a></dd>-->
+                        <dd id="inform"><a href="javascript:;">发布公告</a></dd>
+                        <!--<dd><a href="/back/adminmanager">其他管理</a></dd>-->
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">主页</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/back/index">主页一</a></dd>
+                        <dd><a href="/back/baidu">内嵌页面</a></dd>
+                        <dd><a href="/back/404">404页面</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="/back/newsmanager">资讯管理</a></li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">贴吧管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/back/postmanager">帖子列表</a></dd>
+                        <dd><a href="/back/replymanager">回帖列表</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="/back/usermanager">用户管理</a></li>
+                <li class="layui-nav-item"><a href="/back/imagesmanager">图片管理</a></li>
+                <li class="layui-nav-item"><a href="/back/videomanager">视频管理</a></li>
+                <li class="layui-nav-item"><a href="/back/location">地图定位</a></li>
+            </ul>
+        </div>
+    </div>
+    <!--主体内容区-->
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">
+            内容主体区域
+
+            <div class="layui-fluid">
+                <div class="layui-row layui-col-space15">
+                    <div class="layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header">设置我的资料</div>
+                            <div class="layui-card-body" pad15="">
+
+                                <div class="layui-form" lay-filter="">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">我的角色</label>
+                                        <div class="layui-input-inline">
+                           <!--                 <select id="" name="role" lay-verify="" >
+                                                <option value="1" disabled="">超级管理员</option>
+                                                <option value="2" disabled="">普通管理员</option>
+                                                <option value="3" selected="">审核员</option>
+                                                <option value="4" disabled="">编辑人员</option>
+                                            </select>-->
+                                            <div class="layui-unselect layui-form-select">
+                                                <div class="layui-select-title">
+                                                    <input id="role" type="text" placeholder="请选择" value="" readonly="" class="layui-input layui-unselect">
+                                                    <i class="layui-edge"></i>
+                                                </div>
+                                                <dl class="layui-anim layui-anim-upbit">
+                                                    <dd lay-value="1" class="layui-this">超级管理员</dd>
+                                                    <dd lay-value="2" class=" layui-disabled">普通管理员</dd>
+                                                    <dd lay-value="3" class=" layui-disabled">审核员</dd>
+                                                    <dd lay-value="4" class=" layui-disabled">编辑人员</dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-mid layui-word-aux">当前角色不可更改为其它角色</div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">用户名</label>
+                                        <div class="layui-input-inline">
+                                            <input id="username" type="text" name="username" value="ipet_605" readonly="" class="layui-input">
+                                        </div>
+                                        <div class="layui-form-mid layui-word-aux">不可修改。一般用于后台登入名</div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">昵称</label>
+                                        <div class="layui-input-inline">
+                                            <input id="nickname" type="text" name="nickname" value="儿童劫61" lay-verify="nickname" autocomplete="off" placeholder="请输入昵称" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">性别</label>
+                                        <div class="layui-input-block">
+                                           <input id="male" type="radio"  name="sex" value="男" title="男"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>男</div></div>
+                                            <input id="female" type="radio"  name="sex" value="女" title="女"><div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i><div>女</div></div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">头像</label>
+                                        <div class="layui-input-inline">
+                                            <img id="image" src="/upload/img/item/pets/dog1.jpg" style="width: 50%;height: 3.5em;margin-left: 4em">
+                                        </div>
+                                        <div class="layui-input-inline layui-btn-container" style="width: auto;">
+                                            <button type="button" class="layui-btn layui-btn-primary" id="LAY_avatarUpload">
+                                                <i class="layui-icon"></i>上传图片
+                                            </button><input class="layui-upload-file" type="file" accept="undefined" name="file">
+                                            <button class="layui-btn layui-btn-primary" layadmin-event="avartatPreview">查看图片</button>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">手机</label>
+                                        <div class="layui-input-inline">
+                                            <input id="phone" type="text" name="cellphone" value="" lay-verify="phone" autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">邮箱</label>
+                                        <div class="layui-input-inline">
+                                            <input id="email" type="text" name="email" value="" lay-verify="email" autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item layui-form-text">
+                                        <label class="layui-form-label">备注</label>
+                                        <div class="layui-input-block">
+                                            <textarea id="person-words" name="remarks" placeholder="请输入内容" class="layui-textarea"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <div class="layui-input-block">
+                                            <button class="layui-btn" lay-submit="" lay-filter="setmyinfo">确认修改</button>
+                                            <button type="reset" class="layui-btn layui-btn-primary">重新填写</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © www.Ipet.com - 萌宠信息平台
+        时间：<span id="time" ></span>
+    </div>
+</div>
+<script src="/resources/backstage/backjs/layui-v2.4.5/layui/layui.js"></script>
+<script>
+    //JavaScript代码区域
+    layui.use(['element','layer', 'laypage', 'laydate','form'], function(){
+        var element = layui.element;//模块预加载
+        var layer = layui.layer;
+        var laypage=layui.laypage;
+        var laydate=layui.laydate;
+        var form = layui.form;
+
+        //传入Date对象给初始值
+        laydate.render({
+            elem: '#time'
+            ,type: 'datetime'
+            ,value: new Date()
+        });
+
+    });
+
+
+</script>
+<script type="text/javascript" src="../resources/backstage/backjs/jquery-3.3.1.min.js"></script>
+<script src="/resources/js/back/index.js"></script>
+<script src="/resources/js/back/myinfo.js"></script>
+<script src="/resources/js/back/logout.js"></script>
+</body>
+</html>

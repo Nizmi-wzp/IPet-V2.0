@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>贴吧</title>
+<!--    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+    <script type="text/javascript" src="../resources/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../resources/js/header.js"></script>
+    <script type="text/javascript" src="../resources/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/resources/css/style.css">
+
+    <style type="text/css">
+
+        .container-fluid #post-left{background:#F6F7FB;border:#ccc solid 1px;position: absolute; width: 20%; margin-top: 23px;}
+        .container-fluid #post-left #person img{border: 1px solid #ccc;width: 40%;height: 20%;border-radius: 5px}
+        .container-fluid #post-left #classes h4{color: #985f0d;}
+        .container-fluid #post-left #classes a{color: #767661;}
+        .container-fluid #post-left #classes a:hover{color: #856404;text-decoration: none;}
+        .container-fluid #post-left #hot h4{color: #985f0d;}
+        .container-fluid #post-left #hot ul li{animation:mymove 2s linear 2s infinite alternate;}
+        #personcen{float: right;position: absolute; top:30%; left: 85%;}
+        @keyframes mymove
+        {
+            0%  {color:yellow;}
+            100%  {color:green;}
+        }
+        /*Safari 和 Chrome:*/
+        @-webkit-keyframes mymove /* Safari and Chrome */
+        {
+            0%  {color:yellow;}
+            100%  {color:green;}
+        }
+        .container-fluid #post-right{border: #ccc solid 1px;float: right; width: 78%;}
+        .container-fluid #post-right .post .post-header{padding:40px 1px;background: #faa729; color: #FFFFFF;font-size: 20px;font-family: "Sakkal Majalla";}
+        .container-fluid #post-right .post .post-content{padding: 100px 10px;}
+
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-static-top" id="header">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#menue">
+                <span class="sr-only">切换导航</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/front/index"><h3>萌首页</h3></a>
+        </div>
+        <div class="collapse navbar-collapse" id="menue">
+            <ul class="nav navbar-nav">
+                <li><a href="/front/pet-baike">宠物百科</a></li>
+                <li><a href="/front/pet-news">宠物资讯</a></li>
+                <li><a href="/front/pet-post">宠物贴吧</a></li>
+                <li><a href="/front/pet-images">萌宠秀秀</a></li>
+                <li><a href="/front/pet-video">宠物视频</a></li>
+                <li><a href="/front/pet-adopt">流浪之家</a></li>
+                <li class="dropdown">
+                    <a href="/front/pet-shopping" >
+                        宠淘淘 <b class="caret"></b>
+                    </a>
+                </li>
+
+                <div id="personcen"><a href="/front/mypost" class="btn"><span class="glyphicon glyphicon-user">个人中心</span></a></div>
+                <img id="logo" src="/upload/img/image/logo.jpg" class="hidden-xs" >
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+<div id="nav"></div>
+<div class="container-fluid">
+    <div class="col-md-3" id="post-left" >
+        <div id="left-content" data-spy="affix" data-offset-top="125" >
+
+            <div id="person">
+                <h3>我在贴吧</h3>
+            </div>
+
+            <div id="classes">
+                <h4 >关键词：</h4>
+                <a href="#">娱乐</a>
+                <a href="#">失恋</a>
+                <a href="#">抖音</a>
+                <a href="#">最新消息</a>
+                <a href="#">游戏</a>
+            </div>
+            <div id="hot">
+                <h4>贴吧热议榜</h4>
+                <ul>
+                    <li>周深火了</li>
+                    <li>刘强东案件翻案</li>
+                    <li>LOL全球总决赛，UZI的低谷</li>
+                    <li>宠物乱尿尿</li>
+                    <li>二哈智障了</li>
+                    <li>宠物训练</li>
+                    <li>关爱流浪动物</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-9" id="post-right" style="padding: 20px">
+
+        <div class="input-group">
+            <input id="queryKey" type="text" class="form-control" placeholder="搜索帖子...">
+            <span class="input-group-btn">
+                <button id="postSearch" class="btn btn-default" type="button">搜索</button>
+            </span>
+        </div>
+
+
+        <div id="posts">
+        </div>
+
+        <div style="padding: 10px">
+        <div id="pagination"></div>
+        </div>
+
+        <div  id="showtable"></div>
+
+        <div style="text-align: left">
+            <span>标题：<input style="width:250px;" id="postTitle"/><br></span><br>
+            <textarea style="width: 600px;height: 300px;" id="postContent">
+                请输入文字
+            </textarea><br>
+            <button type="submit" id="submit" class="btn btn-info">发表</button>
+            <button type="reset"  class="btn btn-info">重置</button>
+        </div>
+
+    </div>
+
+</div>
+</div>
+
+<div id="ad" class="col-xs-12">
+    <img src="/upload/img/image/ad1.jpg">
+    <img src="/upload/img/image/ad2.jpg">
+    <img src="/upload/img/image/ad3.jpg">
+</div>
+<div id="bottom" class="col-xs-12">
+    <img src="/upload/img/image/bottom-img1.jpg" >
+    <img src="/upload/img/image/bottom-img2.jpg" >
+    <img src="/upload/img/image/bottom-img3.jpg" >
+    <img src="/upload/img/image/bottom-img4.jpg" >
+</div>
+<div id="footer" class="col-xs-12">版权所有@江西师范大学x3513工作室<br>电话：888-8888</div>
+</body>
+
+<script type="text/javascript" src="http://cdn.staticfile.org/jquery/1.7.1/jquery.min.js"></script>
+<script type='text/javascript'
+        src='../resources/js/jqPaginator.js' charset='utf-8'></script>
+<script type='text/javascript'
+        src='../resources/js/common/common.js' charset='utf-8'></script>
+<script type='text/javascript'
+        src='../resources/js/pet-post.js' charset='utf-8'></script>
+
+
+</html>
+
+

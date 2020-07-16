@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台主页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/resources/backstage/backjs/layui-v2.4.5/layui/css/layui.css">
+    <link rel="stylesheet" href="/resources/css/back/admin.css">
+</head>
+<body class="layui-layout-body layui-bg-gray">
+    <!-- 顶部导航-->
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+             <div class="layui-logo">萌宠后台管理</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+            <ul class="layui-nav layui-layout-left">
+                <li class="layui-nav-item layadmin-flexible" lay-unselect="">
+                    <a title="侧边伸缩" href="javascript:;" layadmin-event="flexible">
+                        <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
+                    </a>
+                </li>
+<!--                <li class="layui-nav-item"><a href="">控制台</a></li>
+                <li class="layui-nav-item"><a href="">商品管理</a></li>
+                <li class="layui-nav-item"><a href="">用户</a></li>-->
+                <li class="layui-nav-item">
+                    <a href="javascript:;">其它系统</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="">邮件管理</a></dd>
+                            <dd><a href="">消息管理</a></dd>
+                            <dd><a href="">授权管理</a></dd>
+                        </dl>
+                 </li>
+             </ul>
+            <ul class="layui-nav layui-layout-right">
+                <li id="msg" class="layui-nav-item" lay-unselect="">
+                    <a href="/back/message" layadmin-event="message">
+                        <i class="layui-icon layui-icon-notice"></i>
+
+                        <!-- 如果有新消息，则显示小圆点 -->
+                        <script type="text/html" template="" lay-url="./json/message/new.js">
+                            {{# if(d.data.newmsg){ }}
+                            <span class="layui-badge-dot"></span>
+                            {{# } }}
+                        </script>  <span id="msgdot" class="layui-badge-dot"></span>
+
+                    </a>
+                </li>
+
+                <li class="layui-nav-item" id="myself">
+                    <a href="javascript:;">个人中心<span id="dot" class="layui-badge-dot"></span></a>
+                </li>
+               <li class="layui-nav-item">
+                 <a href="javascript:;">
+                   <img src="http://t.cn/RCzsdCq" class="layui-nav-img" id="loginimg">
+                     <span id="loginname"></span>
+                 </a>
+               <dl class="layui-nav-child">
+                   <dd><a href="/back/myinfo">基本资料</a></dd>
+                   <dd><a href="/back/changepwd">修改密码</a></dd>
+               </dl>
+              </li>
+           <li id="logout" class="layui-nav-item"><a href="javascript:;">退出</a></li>
+         </ul>
+       </div>
+      <!--左侧导航-->
+       <div class="layui-side layui-bg-black">
+             <div class="layui-side-scroll">
+              <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+          <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+              <li class="layui-nav-item layui-nav-itemed" id="superadmin">
+                  <a class="" href="javascript:;"><i class="layui-icon layui-icon-component"></i>管理员管理</a>
+                  <dl class="layui-nav-child">
+                    <dd><a href="/back/adminmanager">管理员信息</a></dd>
+                    <!--<dd><a href="javascript:;">权限管理</a></dd>-->
+                    <dd id="inform"><a href="javascript:;">发布公告</a></dd>
+                    <!--<dd><a href="/back/adminmanager">其他管理</a></dd>-->
+                   </dl>
+              </li>
+              <li class="layui-nav-item">
+                   <a href="javascript:;">主页</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/back/index">主页一</a></dd>
+                         <dd><a href="/back/baidu">内嵌页面</a></dd>
+                         <dd><a href="/back/404">404页面</a></dd>
+                     </dl>
+              </li>
+              <li class="layui-nav-item"><a href="/back/newsmanager">资讯管理</a></li>
+              <li class="layui-nav-item">
+                  <a href="javascript:;">贴吧管理</a>
+                  <dl class="layui-nav-child">
+                      <dd><a href="/back/postmanager">帖子列表</a></dd>
+                      <dd><a href="/back/replymanager">回帖列表</a></dd>
+                  </dl>
+              </li>
+              <li class="layui-nav-item"><a href="/back/usermanager">用户管理</a></li>
+              <li class="layui-nav-item"><a href="/back/imagesmanager">图片管理</a></li>
+              <li class="layui-nav-item"><a href="/back/videomanager">视频管理</a></li>
+              <li class="layui-nav-item"><a href="/back/location">地图定位</a></li>
+           </ul>
+        </div>
+      </div>
+        <!--主体内容区-->
+       <div class="layui-body">
+             <!-- 内容主体区域 -->
+        <div style="padding: 15px;">
+            <marquee behavior="scorll" direction="left" id="newest_board"></marquee>
+            主页
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-md3 layui-col-sm6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            已注册用户数量
+                            <span class="layui-badge layui-bg-green">user</span>
+                        </div>
+                        <div class="layui-card-body ">
+                            <h2 id="usercount" class="timer count-title" class="count-number" data-to="3202" data-speed="1500">306</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3 layui-col-sm6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            管理员数量
+                            <span class="layui-badge layui-bg-blue">admin</span>
+                        </div>
+                        <div class="layui-card-body">
+                            <h2 class="timer count-title" class="count-number" data-to="485" data-speed="1500"></h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3 layui-col-sm6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            图库数量
+                            <span class="layui-badge layui-bg-cyan">photos</span>
+                        </div>
+                        <div class="layui-card-body">
+                            <h2 class="timer count-title" class="count-number" data-to="9633" data-speed="1500">99000</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md3 layui-col-sm6">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            视频数量
+                            <span class="layui-badge layui-bg-orange">videos</span>
+                        </div>
+                        <div class="layui-card-body ">
+                            <h2 class="timer count-title" class="count-number" data-to="2566" data-speed="1500">99000</h2>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="layui-card layui-fluid" style="margin-top: 10px">
+                <div class="layui-card-header"></div>
+                <div class="layui-card-body">
+                    <div class="layui-row">
+                        <div class="layui-col-sm8">
+                            <h2>最新公告</h2>
+                            <table class="layui-hide" id="demo" lay-filter="test" lay-data="{id: 'idTest'}"></table>
+
+                            <script type="text/html" id="barDemo">
+                                <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+                                <a id="delboard" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                            </script>
+
+                        </div>
+                        <div class="layui-col-sm4">
+                            <div id="echart" style="width:100%;height:30em; ">6663</div>
+                            A组项目进度一
+                            <div class="layui-progress layui-progress-big" lay-showpercent="yes">
+
+                                <div class="layui-progress-bar" lay-percent="30%" style="width: 30%;"><span class="layui-progress-text">30%</span></div>
+                            </div>
+                            B组项目进度二
+                            <div class="layui-progress layui-progress-big" lay-showpercent="yes">
+
+                                <div class="layui-progress-bar" lay-percent="60%" style="width: 30%;"><span class="layui-progress-text">30%</span></div>
+                            </div>
+                            C组项目进度三
+                            <div class="layui-progress layui-progress-big" lay-showpercent="yes">
+                                <div class="layui-progress-bar" lay-percent="90%" style="width: 30%;"><span class="layui-progress-text">30%</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+     </div>
+
+       <div class="layui-footer">
+             <!-- 底部固定区域 -->
+         © www.Ipet.com - 萌宠信息平台
+               时间：<span id="time" ></span>
+       </div>
+     </div>
+     <script src="/resources/backstage/backjs/layui-v2.4.5/layui/layui.js"></script>
+     <script>
+    //模块加载
+    //JavaScript代码区域
+    layui.use(['laydate', 'form','laypage', 'layer', 'table', 'carousel', 'upload', 'element', 'slider'], function(){
+        var element = layui.element;//模块预加载
+        var layer = layui.layer;
+        var laypage=layui.laypage;
+        var laydate=layui.laydate;
+        var table=layui.table;
+
+        //传入Date对象给初始值
+        laydate.render({
+            elem: '#time'
+            ,type: 'datetime'
+            ,value: new Date()
+        });
+
+        //执行一个 table 实例
+        table.render({
+            elem: '#demo'
+            ,height: 420
+            ,url: '/boardadmin/listboardpage' //数据接口
+            ,title: '管理员表'
+            ,page: true //开启分页
+            ,limit:6
+            //,toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+            ,totalRow: true //开启合计行
+            ,cols: [[ //表头
+                ,{field: 'boardId', title: 'ID', width:50, sort: true, fixed: 'left', totalRowText: '合计：'}
+                ,{field: 'boardTitle', title: '公告标题', width:110}
+                ,{field: 'boardContent', title: '公告栏', width: 90, sort: true,totalRow: false}
+                ,{field: 'boardTime', title: '时间', width:80, sort: true}
+                ,{field: 'adminId', title: '管理员', width: 80, sort: true, totalRow: false}
+                ,{fixed: '',title:"操作", width: 300, align:'center', toolbar: '#barDemo'}
+            ]]
+            ,parseData: function(res){ //res 即为原始返回的数据
+                return {
+                    "code": 0, //解析接口状态
+                    "msg": "", //解析提示文本
+                    "count": res.count, //解析数据长度
+                    "data": res.boardList//解析数据列表
+                };
+            }
+        });
+
+        //监听行工具事件
+        table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+            var data = obj.data //获得当前行数据
+                ,layEvent = obj.event; //获得 lay-event 对应的值
+            if(layEvent === 'detail'){
+                layer.open({
+                    title: '公告详情'
+                    ,content: data.boardContent
+                });
+
+            } else if(layEvent === 'del'){
+                layer.confirm('真的删除行么', function(index){
+/*                    obj.del(); //删除对应行（tr）的DOM结构
+                    layer.close(index);*/
+                    //向服务端发送删除指令
+
+                    //向服务端发送删除指令
+                    var boardId=data.boardId;
+                    var role=data.role;
+                    if(role=="超级管理员"){
+                        //则有删除功能
+                        layer.alert("超级管理员不能被删除！")
+                    }
+                    else {
+                        obj.del(); //删除对应行（tr）的DOM结构
+                        layer.close(index);
+                        $.ajax({
+                            url:  '/boardadmin/delboard',
+                            async: false,
+                            type: "post",
+                            data: {boardId: boardId},
+                            dataType: "json",
+                            success: function (datas) {
+
+                                if(datas.success){
+                                    layer.alert("删除成功",{icon:1});
+
+                                }
+                                else layer.alert('删除失败',{icon:2});
+                            }
+                        })
+                    }
+
+                });
+            } else if(layEvent === 'edit'){
+                layer.msg('编辑操作');
+            }
+        });
+
+    });
+     </script>
+<script type="text/javascript" src="../resources/backstage/backjs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../resources/backstage/backjs/echarts.min.js"></script>
+<script src="../resources/backstage/backjs/number.js"></script>//数字递增
+<script src="/resources/js/back/index.js"></script>
+<script src="/resources/js/back/logout.js"></script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wzp.pet.mapper.PostMapper">
+
+    <resultMap type="com.wzp.pet.po.Post" id="PostMap">
+        <id property="postId" column="post_id"/>
+        <result property="postTitle" column="post_title"/>
+        <result property="postContent" column="post_content"/>
+        <result property="postTime" column="post_time"/>
+        <association property="postAuthor" javaType="com.wzp.pet.po.User">
+            <id property="userId" column="user_id"/>
+            <result property="userName" column="user_name"/>
+            <result property="userImage" column="user_image"/>
+
+        </association>
+    </resultMap>
+
+    <select id="queryPost" resultType="com.wzp.pet.po.Post">
+        SELECT
+               Post_id,
+               Post_autor,
+               Post_title,
+               Post_content,
+               Post_time
+        from post
+        ORDER BY Post_id
+        ASC
+    </select>
+
+
+    <select id="getPost" resultType="com.wzp.pet.po.Post">
+
+        select * from post
+
+    </select>
+
+    <select id="findPostByAuthor" resultType="com.wzp.pet.po.Post">
+        select * from post where user_id=#{userId}
+    </select>
+
+    <!--<select id="findPostById" resultType="com.wzp.pet.po.Post">
+        select * from post where Post_id=#{postId}
+    </select>  -->
+
+
+    <select id="findPostById" resultMap="PostMap">
+        select  post_time,post_id,post_title,post.user_id,post_title,user_name from post,user where Post_id=#{postId} and post.user_id=user.User_id
+
+    </select>
+
+    <insert id="addpost">
+        insert into post(User_id,Post_title,Post_content,Post_time) values (#{post.postAuthor.userId},#{post.postTitle},#{post.postContent},#{post.postTime})
+    </insert>
+
+
+    <delete id="delPostById">
+        delete from post where Post_id=#{postId}
+    </delete>
+
+    <select id="postlistPage"  resultMap="PostMap">
+        select Post_id,post.User_id,user_image,Post_title,Post_content,User_name,post_time
+        from post,user
+        <where>
+            user.user_id=post.user_id
+            <if test="queryKey!=null">
+                and (Post_title like CONCAT('%',#{queryKey},'%')
+                or Post_content like CONCAT('%',#{queryKey},'%'))
+            </if>
+        </where>
+        order by post_id desc limit #{rowIndex},#{pageSize}
+    </select>
+
+
+
+    <select id="getRecordCount" resultType="int" >
+        select count(*)
+        from post
+        <where>
+            <if test="queryKey!=null">
+                and (Post_title like CONCAT('%',#{queryKey},'%')
+                or Post_content like CONCAT('%',#{queryKey},'%'))
+            </if>
+        </where>
+    </select>
+
+
+    <select id="findUserMsgByPage" resultMap="PostMap">
+
+        select  post_id,user_name,Post_title,Post_content,Post_time,user_image
+        from user,post
+        <where>
+            user.user_id=post.user_id
+            <if test="queryKey!=null">
+                and (Post_title like CONCAT('%',#{queryKey},'%')
+                or Post_content like CONCAT('%',#{queryKey},'%'))
+            </if>
+            and post.user_id=#{userId}
+        </where>
+        order by post_id desc limit #{rowIndex},#{pageSize}
+
+    </select>
+
+    <select id="getRecordCountByUserId" resultType="int" >
+        select count(*)
+        from post
+        <where>
+            <if test="queryKey!=null">
+                and (Post_title like CONCAT('%',#{queryKey},'%')
+                or Post_content like CONCAT('%',#{queryKey},'%'))
+            </if>
+            and user_id=#{userId}
+        </where>
+    </select>
+
+</mapper>

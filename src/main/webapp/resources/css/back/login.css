@@ -1,0 +1,38 @@
+body{
+
+}
+#adminpermit{
+    display: none;
+}
+#null{
+    padding: 5em;
+}
+.login-header h2{color: #1c7430}
+.login-header p{color: rgba(65, 85, 73, 0.33)
+}
+.login-main{
+    width: 30em;
+    margin: 0 auto;/*居中*/
+}
+.login-header{
+    text-align: center;
+}
+.layui-icon-login-qq{
+    color: #3492ed;
+}
+.layui-icon-login-wechat{
+    color: #4daf29;
+}
+.layui-icon-login-weibo{
+    color: #cf1900;
+}
+a.layadmin-link{
+    color: #1c7430;
+    float: right;
+}
+/*自定义标签*/
+mine\:tag {
+    font-size: .36rem;
+    font-weight: bold;
+    color: red;
+}

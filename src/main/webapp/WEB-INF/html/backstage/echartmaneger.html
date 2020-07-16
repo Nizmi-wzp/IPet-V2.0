@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图表管理</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../resources/backstage/backcss/bootstrap.css">
+    <script type="text/javascript" src="../resources/backstage/backjs/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../resources/backstage/backjs/bootstrap.js"></script>
+    <link rel="stylesheet" href="../resources/backstage/backcss/main.css">
+    <title>Title</title>
+    <script type="text/javascript" src="../resources/backstage/backjs/echarts.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#back-nav">
+                <span class="sr-only">切换导航</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="backmain.jsp">萌宠管理员登录界面</a>
+        </div>
+        <div class="collapse navbar-collapse" id="back-nav">
+            <form class="form-group navbar-left">
+                <div class="form-inline">
+                    <input class="form-control" placeholder="Search...">
+                    <span class="glyphicon glyphicon-search"></span>
+                </div>
+            </form>
+            <div class="navbar-right dropdown">
+                <button class="btn btn-default "><span class="glyphicon glyphicon-envelope"></span></button>
+                <button class="btn btn-default" ><span class="glyphicon glyphicon-bell"></span></button>
+                <button class=" btn btn-default dropdown-toggle" data-toggle="dropdown"><img src="../upload/img/backstageimg/head.jpg" ><font style="color: #0886bf;">${loginname}</font><span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="">
+                            <img src="../upload/img/backstageimg/head.jpg">
+                            <div style="color:#3186fc;" id="logname"></div>
+                            <div><font style="color:#3186fc;">${loginname}</font>@sina.com</div>
+                            <button class="btn btn-danger">更多</button>
+                        </a>
+                    </li>
+                    <li><a href="backstage/jsp/Myinformation.jsp">我的信息</a></li>
+                    <li><a href="">账户设置</a></li>
+                    <li id="log-out"><a>退出</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div id="wrap" class="container-fluid">
+    <div id="left" class="col-md-3 ">
+        <h3>萌宠管理员登录界面</h3>
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
+                    <a class="panel-title" data-target="#collapseOne">
+                        <img src="../upload/img/backstageimg/head.jpg"><i>${loginname}</i>Administrator<span class="caret"></span>
+                    </a>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <ul>
+                            <li><a href="backstage/jsp/Myinformation.jsp">个人信息</a></li>
+                            <li><a href="backstage/jsp/AdminLimit.jsp">权限管理</a></li>
+                            <li><a href="#">账户管理</a></li>
+                        </ul>
+                    </div><!--<%&#45;&#45;pannel-body&#45;&#45;%>-->
+                </div><!--<%&#45;&#45;collapseOne&#45;&#45;%>-->
+            </div><!--<%&#45;&#45;panel-default&#45;&#45;%>-->
+        </div><!--<%&#45;&#45;panel-group&#45;&#45;%>-->
+        <div>
+            <ul id="manager">
+                <li><a href="/backstage/adminmaneger">管理员管理<span class="number">20</span></a></li>
+                <li><a href="/backstage/backmain">主页<span class="number">4</span></a></li>
+                <li><a href="/backstage/newsmaneger">资讯管理<span class="number">10</span></a></li>
+                <li><a href="/backstage/postmaneger">贴吧管理<span class="number">6</span></a></li>
+                <li><a href="/backstage/usermaneger">用户管理<span class="number">2</span></a></li>
+                <li><a href="/backstage/imagesmaneger">图片管理</a></li>
+                <li><a href="/backstage/vediomaneger">视频管理</a></li>
+                <li><a href="/backstage/shoppingmaneger">购物管理</a></li>
+                <li><a href="/backstage/adoptmaneger">领养管理</a></li>
+                <li><a href="/backstage/echartmaneger">图表显示</a></li>
+                <li><a href="/backstage/petmap">地图定位</a></li>
+                <button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#myModal">模态框公告栏</button>
+                <!-- 模态框（Modal） -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content" >
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
+                            </div>
+                            <div class="modal-body">在这里添加一些文本</div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <button type="button" class="btn btn-primary">提交更改</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+            </ul>
+
+        </div>
+    </div>
+
+    <div id="right" class="col-md-9">
+        <div id="main" style="width: 400px;height:400px;"></div>
+        <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('main'));
+
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: '视频点击量'
+                },
+                tooltip: {},
+                legend: {
+                    data:['视频']
+                },
+                xAxis: {
+                    data: ["猫","狗","鸟","水族","虫类","异类"]
+                },
+                yAxis: {},
+                series: [{
+                    name: '点击率',
+                    type: 'bar',
+                    data: [10,20,30,40,50,60
+
+                    ]
+                }]
+            };
+
+
+            // 使用刚指定的配置项和数据显示图表。
+           // myChart.setOption(option);
+
+
+            //调用load函数，用于从后台获得数据并且传给option中的xAxis以及series（这两个用于显示柱状图）
+            load(option);
+            // 为echarts对象加载数据
+           myChart.setOption(option);
+
+            //利用ajax技术从后台获取数据并且给option
+            function load(option){
+                $.ajax({
+                    type : "get",
+                    async : false, //同步执行
+                    url : "/vedioadmin/vedioclick",   //后台处理的servlet路径
+                    data : {},
+                    dataType : "json", //返回数据形式为json
+                    success : function(result) {  //如果ajax成功则后台json返回到result中
+
+                        if (result.success) {
+
+                            //初始化option.xAxis[0]中的data，就是给option中的xAxis加入data[]
+                            var len=result.total;
+                            var videoList=result.videoList;
+
+
+                            option.xAxis.data=[];
+                            for(var i=0;i<len;i++){
+
+                                option.xAxis.data.push(videoList[i].vedioType);
+                            }
+
+                            //初始化option.series[0]中的data
+                            option.series[0].data=[];
+                            for(var i=0;i<len;i++){
+                                alert(videoList[i].clicks)
+                                option.series[0].data.push(videoList[i].clicks);
+                            }
+                        }
+                    }
+                });
+            }
+        </script>
+        <div id="map1" style="width: 400px;height:400px; float: left" >
+            <script>
+                var myChart = echarts.init(document.getElementById('map1'));
+                myChart.setOption({
+                    series : [
+                        {
+                            name: '访问来源',
+                            type: 'pie',
+                            radius: '55%',
+                            data:[
+                                {value:235, name:'视频广告'},
+                                {value:274, name:'联盟广告'},
+                                {value:310, name:'邮件营销'},
+                                {value:335, name:'直接访问'},
+                                {value:400, name:'搜索引擎'}
+                            ]
+                        }
+                    ]
+                })
+            </script>
+        </div>
+
+    </div>&#45;&#45;%>-->
+    </div>
+</div>
+
+<script type="text/javascript" src="/resources/backstage/backjs/echartmanager.js"></script>
+</body>
+</html>

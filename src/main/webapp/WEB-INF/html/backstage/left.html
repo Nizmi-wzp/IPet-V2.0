@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="left" class="col-md-3 ">
+    <h3>萌宠管理员登录界面</h3>
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
+                <a class="panel-title" data-target="#collapseOne">
+                    <img src="../upload/img/backstageimg/head.jpg"><i>${loginname}</i>Administrator<span class="caret"></span>
+                </a>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <ul>
+                        <li><a href="backstage/jsp/Myinformation.jsp">个人信息</a></li>
+                        <li><a href="backstage/jsp/AdminLimit.jsp">权限管理</a></li>
+                        <li><a href="#">账户管理</a></li>
+                    </ul>
+                </div><!--<%&#45;&#45;pannel-body&#45;&#45;%>-->
+            </div><!--<%&#45;&#45;collapseOne&#45;&#45;%>-->
+        </div><!--<%&#45;&#45;panel-default&#45;&#45;%>-->
+    </div><!--<%&#45;&#45;panel-group&#45;&#45;%>-->
+    <div>
+        <ul id="manager">
+            <li><a href="/backadmin/adminmaneger">管理员管理<span class="number">20</span></a></li>
+            <li><a href="/backadmin/backmain">主页<span class="number">4</span></a></li>
+            <li><a href="/backadmin/Login">资讯管理<span class="number">10</span></a></li>
+            <li><a href="printpost.do">贴吧管理<span class="number">6</span></a></li>
+            <li><a href="">XX管理<span class="number">2</span></a></li>
+            <li><a href="printimages.do">图片管理</a></li>
+            <li><a href="printvedio.do">视频管理</a></li>
+            <li><a href="">购物管理</a></li>
+            <li><a href="backstage/jsp/AdoptManegement.jsp">领养管理</a></li>
+            <li><a href="backstage/jsp/Echart.jsp">图表显示</a></li>
+            <button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#myModal">模态框公告栏</button>
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content" >
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
+                        </div>
+                        <div class="modal-body">在这里添加一些文本</div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary">提交更改</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+        </ul>
+
+    </div>
+</div>
+</body>
+</html>

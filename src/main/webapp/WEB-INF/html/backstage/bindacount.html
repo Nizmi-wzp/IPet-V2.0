@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>账户绑定</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div>
+    <ul>
+        <li>
+            <div class="">
+                <input class="form-control" id="adminName" placeholder="名称">
+            </div>
+        </li>
+        <li>
+            <div>
+                <input class="form-control" id="password" placeholder="密码">
+            </div>
+        </li>
+        <li>
+            <div>
+                验证码<input
+                    id="j_captcha" name="j_captcha" type="text"
+                    class="form-control in" placeholder="验证码" />
+                <img id="captcha_img" alt="点击更换" title="点击更换"
+                     onclick="changeVerifyCode(this)" src="../Kaptcha" />
+            </div>
+        </li>
+    </ul>
+</div>
+
+<a class="btn btn-block btn-info" onclick="javascript:history.back(-1);">返回</a>
+<a class="btn btn-block btn-primary" type="submit" id="submit">提交</a>
+
+<script type='text/javascript' src='../resources/js/common/common.js'
+        charset='utf-8'></script>
+<script type='text/javascript'
+        src='/resources/backstage/backjs/bindacount.js' charset='utf-8'></script>
+</body>
+</html>
